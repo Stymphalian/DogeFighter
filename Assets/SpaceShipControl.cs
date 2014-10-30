@@ -6,10 +6,15 @@ public class SpaceShipControl : MonoBehaviour {
 	public float force;
 	public float turnspeed;
 	public float maxAngularVelocity;
+	public float maxSpeed;
+	public ParticleSystem tailTrail;
+
+	private float initialEmissionRate;
 
 	// Use this for initialization
 	void Start () {
 		rigidbody.maxAngularVelocity = maxAngularVelocity;
+		initialEmissionRate = tailTrail.emissionRate;
 	}
 
 	void FixedUpdate () {
@@ -18,7 +23,15 @@ public class SpaceShipControl : MonoBehaviour {
 		float pitch = -Input.GetAxis("Vertical");
 		float roll = Input.GetAxis("Roll");
 
+		float gas = Input.GetAxis("Gas");
+		if (gas > 0) {
+			tailTrail.emissionRate = initialEmissionRate * gas;
+		} else {
+			tailTrail.emissionRate = 0;
+		}
+
 		rigidbody.AddRelativeTorque(pitch*turnspeed, yaw*turnspeed, roll*turnspeed);
+		rigidbody.AddForce(gas * force * this.transform.forward);
 	}
 
 	// Update is called once per frame
