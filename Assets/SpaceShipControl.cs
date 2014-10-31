@@ -8,6 +8,10 @@ public class SpaceShipControl : MonoBehaviour {
 	public float maxAngularVelocity;
 	public float maxSpeed;
 	public ParticleSystem tailTrail;
+	public bool useOVR;
+
+	public Camera defaultCamera;
+	public Object OVRRig;
 
 	private float initialEmissionRate;
 
@@ -15,6 +19,11 @@ public class SpaceShipControl : MonoBehaviour {
 	void Start () {
 		rigidbody.maxAngularVelocity = maxAngularVelocity;
 		initialEmissionRate = tailTrail.emissionRate;
+		if (useOVR) {
+			Destroy(defaultCamera.gameObject);
+		} else {
+			Destroy(OVRRig);
+		}
 	}
 
 	void FixedUpdate () {

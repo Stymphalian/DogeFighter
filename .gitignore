@@ -39,6 +39,7 @@ Temp/
 Obj/
 UnityGenerated/
 Library/
+*.app/
  
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
