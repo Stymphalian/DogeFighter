@@ -1693,7 +1693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: {x: 0, y: 0, z: .330000013}
-  force: .460000008
+  force: 10.1499996
   turnspeed: .100000001
   maxAngularVelocity: 2
   maxSpeed: 10
