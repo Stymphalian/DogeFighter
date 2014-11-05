@@ -7,5 +7,5 @@ function Start () {
 }
 
 function Update () {
-	this.transform.localEulerAngles = -reference.transform.eulerAngles;
+	this.transform.eulerAngles.z += Time.deltaTime * 10;
 }
