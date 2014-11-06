@@ -25,8 +25,8 @@ public class UniverseModel : MonoBehaviour {
 			if (relativePosition.magnitude < visionRange) {
 				GameObject model = (GameObject)GameObject.Instantiate(planetModel);
 				model.transform.parent = host.transform;
-				model.transform.localPosition = ship.transform.rotation * (relativePosition / visionRange);
+				model.transform.localPosition = Quaternion.Inverse(ship.transform.rotation) * (relativePosition / visionRange);
 			}
-		}
+		}	
 	}
 }

@@ -7,5 +7,5 @@ function Start () {
 }
 
 function Update () {
-	this.transform.eulerAngles.z += Time.deltaTime * 10;
+	this.transform.localRotation = Quaternion.Inverse(reference.transform.rotation);
 }
