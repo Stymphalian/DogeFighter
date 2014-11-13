@@ -49,7 +49,7 @@ public class SpaceShipControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if( Input.GetKeyDown("1") ){
-			Vector3 pos = transform.forward*2;
+			Vector3 pos = transform.forward*30;
 			GameObject missle1 = (Instantiate(misslePrefab,transform.position + pos,Quaternion.identity) as GameObject);
 			MissleController m1 = missle1.GetComponent<MissleController>();
 			m1.Init(missleTarget,0.75f,0.5f,this.rigidbody.velocity);

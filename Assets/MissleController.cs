@@ -35,7 +35,7 @@ public class MissleController : MonoBehaviour {
 		this.rigidbody.velocity = initialVelocity + this.transform.forward*2;
 		//		      tailTrail.emissionRate = 100;
 		
-		StartCoroutine(AutoExplode(autoDestroyTime));
+//		StartCoroutine(AutoExplode(autoDestroyTime));
 	}
 	
 	// Update is called once per frame
@@ -53,7 +53,7 @@ public class MissleController : MonoBehaviour {
 
 
 		this.rigidbody.AddForce(this.transform.forward*speed);
-		Debug.Log(rigidbody.velocity);
+//		Debug.Log(rigidbody.velocity);
 	}
 	
 	void OnTriggerEnter(Collider other){
