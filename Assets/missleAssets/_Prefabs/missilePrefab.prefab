@@ -34,8 +34,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: .1778, z: 22.5039997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: .0974877477}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -253,7 +253,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 5.5
+      scalar: -3.5999999
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -380,7 +380,7 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: 14.3999996
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -413,7 +413,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startRotation:
-      scalar: .3333579
+      scalar: .331612557
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -452,8 +452,8 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     type: 4
-    radius: 1.88
-    angle: .0399999991
+    radius: .0500000007
+    angle: 0
     length: 5
     boxX: 1
     boxY: 1
@@ -465,7 +465,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 10.7600002
+      scalar: 96.7099991
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -514,14 +514,14 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
-          inSlope: 2
-          outSlope: 2
+          value: .14864859
+          inSlope: -.403189838
+          outSlope: -.403189838
           tangentMode: 0
-        - time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
+        - time: .923076928
+          value: .418918967
+          inSlope: -.490257114
+          outSlope: -.490257114
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1252,7 +1252,7 @@ ParticleSystemRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 7f16aaa27226a4016aab4275eda79451, type: 2}
+  - {fileID: 2100000, guid: f89a53f13e64bbbd73bd6eb9f8509a09, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
