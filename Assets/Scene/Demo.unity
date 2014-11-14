@@ -2081,6 +2081,9 @@ MonoBehaviour:
   currentBelt: -100
   minimumDistance: 700
   maximumDistance: 800
+  minimumScale: .0199999996
+  maximumScale: .0500000007
+  height: .189999998
   density: 20
   randomSeed: 0
   reference: {fileID: 848980026}

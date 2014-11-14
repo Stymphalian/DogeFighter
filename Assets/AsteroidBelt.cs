@@ -8,6 +8,9 @@ public class AsteroidBelt : MonoBehaviour {
 	public int currentBelt = -100;
 	public float minimumDistance;
 	public float maximumDistance;
+	public float minimumScale;
+	public float maximumScale;
+	public float height;
 	public int density = 20;
 	public float randomSeed;
 	public GameObject reference;
@@ -46,7 +49,9 @@ public class AsteroidBelt : MonoBehaviour {
 					float dis = Random.Range(minimumDistance, maximumDistance);
 					GameObject asteroid = (GameObject)GameObject.Instantiate(asteroidModels[0]);
 					asteroid.transform.parent = this.transform;
-					asteroid.transform.position = new Vector3(Mathf.Cos(asAngle), 0, Mathf.Sin(asAngle)) * dis + this.transform.position;
+					asteroid.transform.position = this.transform.position + new Vector3(Mathf.Cos(asAngle), Random.Range(-height, height), Mathf.Sin(asAngle)) * dis + this.transform.position;
+					asteroid.transform.eulerAngles = new Vector3(Random.Range(0,360),Random.Range(0,360),Random.Range(0,360));
+					asteroid.transform.localScale = new Vector3(Random.Range(minimumScale, maximumScale), Random.Range(minimumScale, maximumScale), Random.Range(minimumScale, maximumScale));
 					asteroids[currentBelt].Add(asteroid);
 				}
 			}
