@@ -89,7 +89,7 @@ public class SpaceShipControl : MonoBehaviour {
 		if (Input.GetKeyDown("1") && currentMissileCount > 0) {
 			fireMissle(networkView.viewID,networkView.viewID);
 		} else if (Input.GetKeyDown("3")) {
-			fireGun(0);
+			fireGun();
 		}
 
 		timeElapsedSinceLastMissileRegen += Time.deltaTime;
@@ -104,13 +104,6 @@ public class SpaceShipControl : MonoBehaviour {
 		float speed = rigidbody.velocity.magnitude;
 		audio.pitch = speed / 200;
 
-		// Aiming
-		if (Input.GetKeyDown ("2")){
-			float maxDistance = 1000;
-			Ray ray = defaultCamera.ScreenPointToRay(Input.mousePosition);
-			Debug.Log(ray);
-			Debug.DrawRay(ray.origin, ray.direction, Color.white, 50, false);
-		}
 	}
 
 	public void Respawn() {
@@ -133,17 +126,25 @@ public class SpaceShipControl : MonoBehaviour {
 	}
 
 	[RPC]
-	public void fireGun(int newHealth){
+	public void fireGun(){
 		Debug.Log("hey the gun fired");
 		if( networkView.isMine){
 			networkView.RPC("fireGun",RPCMode.Others);
 		}
 
+		Ray ray = defaultCamera.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit = new RaycastHit();
+		Vector3 target;
+		if (Physics.Raycast (ray, out hit, 10000f))
+			target = hit.point;
+		else
+			target = ray.direction * 10000f;
+
 		Vector3 pos = bulletHatch.position;
 		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 		BulletController bulletController = bullet.GetComponent<BulletController> ();
-		bulletController.Init(0.75f, this.rigidbody.velocity);
-		GameObject.Instantiate(bulletBurstPrefab, bullet.transform.position, Quaternion.identity);
+		//bulletController.Init(0.75f, this.rigidbody.velocity);
+		bulletController.Init(0.75f, target);
 	}
 
 	[RPC]
