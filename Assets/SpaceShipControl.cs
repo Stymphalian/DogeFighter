@@ -104,6 +104,9 @@ public class SpaceShipControl : MonoBehaviour {
 		}
 		float timeUntilMissileRegen = missileRegenInterval - timeElapsedSinceLastMissileRegen;
 		missileCount.text = "# Missiles: " + currentMissileCount + "\nRegens in: " + timeUntilMissileRegen.ToString("0.0") + "s";
+
+		float speed = rigidbody.velocity.magnitude;
+		audio.pitch = speed / 200;
 	}
 
 
