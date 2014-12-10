@@ -14,20 +14,23 @@ public class SpaceShipControl : MonoBehaviour {
 
 	public GameObject misslePrefab;
 	public GameObject missleTarget; // temporary hardcoded target
-	public GameObject bulletPrefab;
 	public GameObject playerSpawnPoint;
 	public TextMesh velocityText;
 	public TextMesh missileCount;
 	public TextMesh healthText;
 
+	// Bullet
+	public GameObject bulletPrefab;
 	public GameObject bulletBurstPrefab;	// temporarily using same prefab as missile explosion. Get new explosion prefab for bullet
+	public Transform bulletHatch;
+	public float bulletFireInterval;
+	private float timeElapsedSinceLastBulletFire;
 
 	public Camera defaultCamera;
 	public Object OVRRig;
 	public GameObject fireMissileExplosion;
 	public Transform missileHatch;
-	public Transform bulletHatch;
-
+	
 	private float initialEmissionRate;
 	private int currentMissileCount;
 	private float timeElapsedSinceLastMissileRegen;
@@ -51,6 +54,7 @@ public class SpaceShipControl : MonoBehaviour {
 		initialEmissionRate = tailTrail.emissionRate;
 		currentMissileCount = initialMissileCount;
 		timeElapsedSinceLastMissileRegen = 0.0f;
+		timeElapsedSinceLastBulletFire = 0.0f;
 
 		if (useOVR) {
 			Destroy(defaultCamera.gameObject);
@@ -88,8 +92,13 @@ public class SpaceShipControl : MonoBehaviour {
 
 		if (Input.GetKeyDown("1") && currentMissileCount > 0) {
 			fireMissle(networkView.viewID,networkView.viewID);
-		} else if (Input.GetKeyDown("3")) {
-			fireGun(0);
+		} else if (Input.GetKey("3")) {
+			timeElapsedSinceLastBulletFire += Time.deltaTime;
+			if (timeElapsedSinceLastBulletFire >= bulletFireInterval)
+			{
+				timeElapsedSinceLastBulletFire = 0;
+				fireGun(0);
+			}
 		}
 
 		timeElapsedSinceLastMissileRegen += Time.deltaTime;
