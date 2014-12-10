@@ -1170,7 +1170,7 @@ AudioSource:
   m_GameObject: {fileID: 129118}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 269126503b8704d7c96696ea743934b9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5da0b319aada2433a8e95e654c63e428, type: 3}
   m_PlayOnAwake: 1
   m_Volume: .5
   m_Pitch: 1
@@ -1347,12 +1347,14 @@ MonoBehaviour:
   velocityText: {fileID: 10229108}
   missileCount: {fileID: 10209270}
   healthText: {fileID: 10229106}
+  bulletBurstPrefab: {fileID: 0}
   defaultCamera: {fileID: 2029108}
   OVRRig: {fileID: 129146}
   fireMissileExplosion: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
   missileHatch: {fileID: 481470}
   bulletHatch: {fileID: 429110}
   health: 0
+  deadFlag: 0
 --- !u!114 &11429110
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1621,6 +1621,68 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 513611423}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &525384494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 111702, guid: 244c6ad319b65d647afc34815d56bef5, type: 2}
+  m_PrefabInternal: {fileID: 1222444685}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 525384495}
+  - 120: {fileID: 525384496}
+  m_Layer: 0
+  m_Name: line
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &525384495
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 411702, guid: 244c6ad319b65d647afc34815d56bef5, type: 2}
+  m_PrefabInternal: {fileID: 1222444685}
+  m_GameObject: {fileID: 525384494}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796155713}
+  m_RootOrder: 3
+--- !u!120 &525384496
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 12011702, guid: 244c6ad319b65d647afc34815d56bef5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1222444685}
+  m_GameObject: {fileID: 525384494}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 2552fb91de09345b7ae94be2a1f27046, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: .100000001
+    endWidth: .00999999978
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1
 --- !u!1 &528160035
 GameObject:
   m_ObjectHideFlags: 0
@@ -3983,6 +4045,18 @@ Prefab:
       propertyPath: crosshairTexture
       value: 
       objectReference: {fileID: 2800000, guid: 0565332d540dbcf4d9a01224a867cee8, type: 3}
+    - target: {fileID: 8200000, guid: 244c6ad319b65d647afc34815d56bef5, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5da0b319aada2433a8e95e654c63e428, type: 3}
+    - target: {fileID: 8200000, guid: 244c6ad319b65d647afc34815d56bef5, type: 2}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 244c6ad319b65d647afc34815d56bef5, type: 2}
+      propertyPath: BypassListenerEffects
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 244c6ad319b65d647afc34815d56bef5, type: 2}
   m_RootGameObject: {fileID: 1652931489}
@@ -4649,7 +4723,7 @@ SphereCollider:
   m_GameObject: {fileID: 1613116398}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
@@ -4708,9 +4782,9 @@ AudioSource:
   m_GameObject: {fileID: 1652931489}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 269126503b8704d7c96696ea743934b9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5da0b319aada2433a8e95e654c63e428, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4800,17 +4874,12 @@ MonoBehaviour:
   missileCount: {fileID: 942423504}
   healthText: {fileID: 789023550}
   bulletBurstPrefab: {fileID: 0}
-  bulletSpawnPoint: {fileID: 0}
   defaultCamera: {fileID: 1813216407}
   OVRRig: {fileID: 848605329}
   fireMissileExplosion: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
   missileHatch: {fileID: 620600447}
   bulletHatch: {fileID: 1422318467}
   health: 0
-  missleAmmo: 0
-  missleCooldown: 0
-  gunAmmo: 0
-  gunCooldown: 0
   deadFlag: 0
 --- !u!64 &1652931494
 MeshCollider:
@@ -6201,6 +6270,7 @@ Transform:
   - {fileID: 1613116399}
   - {fileID: 1603745508}
   - {fileID: 324210229}
+  - {fileID: 525384495}
   m_Father: {fileID: 76178491}
   m_RootOrder: 6
 --- !u!114 &1796155714
@@ -6217,8 +6287,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRange: 1000
   planetModel: {fileID: 100000, guid: c0cb1b666ee51b54ebd78ec704cf4fc2, type: 2}
+  shipModel: {fileID: 100000, guid: 3af13e22650e8bc4489e33e2942f55f6, type: 2}
   host: {fileID: 1603745507}
   ship: {fileID: 1652931489}
+  globe: {fileID: 1613116398}
+  enemyShip: {fileID: 0}
+  line: {fileID: 525384496}
+  targetScale: 0
 --- !u!1 &1813216401
 GameObject:
   m_ObjectHideFlags: 0
