@@ -32,7 +32,7 @@ public class NetworkManager : MonoBehaviour {
 	public void Play(OnPlay callback){
 		Debug.Log ("Play");
 		MasterServer.ClearHostList();
-		MasterServer.RequestHostList("jordanGame");
+		MasterServer.RequestHostList("com.jordanyu.dogeFighter");
 		shouldConnect = true;
 		onPlayCallback = callback;
 	}
@@ -77,7 +77,7 @@ public class NetworkManager : MonoBehaviour {
 		while( attempts > 0){
 			NetworkConnectionError e =  Network.InitializeServer(32,port,useNat);
 			if(e == NetworkConnectionError.NoError){
-				MasterServer.RegisterHost("jordanGame","dutchBlitz","Here is a comment");
+				MasterServer.RegisterHost("com.jordanyu.dogeFighter","DogeFighter","Here is a comment");
 				break;
 			}else{
 				// try again with new ports?
