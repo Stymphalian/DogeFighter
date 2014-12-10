@@ -21,10 +21,14 @@ public class SpaceShipControl : MonoBehaviour {
 
 	private float initialEmissionRate;
 
+	// player model stuff
+	public int health;
+
 	void Awake(){
 		if (networkView.isMine == false)
 		{
 			defaultCamera.enabled = false; // disable the camera of the non-owned Player;
+			defaultCamera.gameObject.GetComponent<MouseLook>().enabled = false;
 			defaultCamera.GetComponent<AudioListener>().enabled = false;// Disables AudioListener of non-owned Player - prevents multiple AudioListeners from being present in scene.
 		}
 	}
@@ -69,10 +73,37 @@ public class SpaceShipControl : MonoBehaviour {
 			MissleController m1 = missle1.GetComponent<MissleController>();
 			m1.Init(missleTarget,0.75f,0.5f,this.rigidbody.velocity);
 			GameObject.Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity);
+		}else if( Input.GetKeyDown("2")){
+			GameObject[] gos = GameObject.FindGameObjectsWithTag("Ship");
+			for ( int i = 0; i < gos.Length; ++i){
+				Debug.Log("gos [" + i + "] networkView.isMine " + gos[i].networkView.isMine);
+				if( gos[i].networkView.isMine == false){
+					gos[i].transform.Find("Camera").GetComponent<MouseLook>().enabled = false;
+				}
+			}
 		}
 	}
 
 
+	
+	[RPC]
+	public void updateHealth(int newHealth){
+		if( Network.isServer){
+			networkView.RPC("updateHealth",RPCMode.Others, newHealth);
+		}
+		this.health = newHealth;
+	}
+	
+	// send to server actions...
+	[RPC]
+	public void updateHealthAction(int newHealth){
+		if( Network.isClient){
+			networkView.RPC("updateHealthAction",RPCMode.Server);
+		}else if( Network.isServer){
+			updateHealth(newHealth);
+		}
+	}
+	
 	public void Respawn(){
 		if( playerSpawnPoint != null){
 
