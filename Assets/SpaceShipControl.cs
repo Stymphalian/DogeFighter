@@ -14,6 +14,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 	public GameObject misslePrefab;
 	public GameObject missleTarget; // temporary hardcoded target
+	public GameObject bulletPrefab;
 	public GameObject playerSpawnPoint;
 	public TextMesh velocityText;
 	public TextMesh missileCount;
@@ -26,6 +27,7 @@ public class SpaceShipControl : MonoBehaviour {
 	public Object OVRRig;
 	public GameObject fireMissileExplosion;
 	public Transform missileHatch;
+	public Transform bulletHatch;
 
 	private float initialEmissionRate;
 	private int currentMissileCount;
@@ -91,6 +93,13 @@ public class SpaceShipControl : MonoBehaviour {
 
 		if( Input.GetKeyDown("1") ){
 			fireMissle(networkView.viewID,networkView.viewID);
+			currentMissileCount--;
+		} else if (Input.GetKeyDown("3")) {
+			Vector3 pos = bulletHatch.position;
+			GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
+			BulletController bulletController = bullet.GetComponent<BulletController> ();
+			bulletController.Init(0.75f, this.rigidbody.velocity);
+			GameObject.Instantiate (fireMissileExplosion, bullet.transform.position, Quaternion.identity);	// temporarily using fire explosion
 		}
 
 		timeElapsedSinceLastMissileRegen += Time.deltaTime;
@@ -143,6 +152,9 @@ public class SpaceShipControl : MonoBehaviour {
 		Vector3 pos = missileHatch.position;
 		GameObject missle1 = (Network.Instantiate(misslePrefab,pos,Quaternion.identity,0) as GameObject);
 		Network.Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity,0);
+
+
+		currentMissileCount--;
 
 		// set the target and stuff
 		MissleController m1 = missle1.GetComponent<MissleController>();
