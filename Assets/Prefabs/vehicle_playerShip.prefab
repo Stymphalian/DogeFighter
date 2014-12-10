@@ -17,6 +17,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &111702
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 411702}
+  - 120: {fileID: 12011702}
+  m_Layer: 0
+  m_Name: line
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &129106
 GameObject:
   m_ObjectHideFlags: 1
@@ -461,6 +477,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 429154}
   m_RootOrder: 3
+--- !u!4 &411702
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429136}
+  m_RootOrder: 3
 --- !u!4 &429106
 Transform:
   m_ObjectHideFlags: 1
@@ -542,7 +570,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2073.92163, y: -119.745766, z: -1729.6969}
+  m_LocalPosition: {x: 289.022949, y: -1710.86438, z: -261.643219}
   m_LocalScale: {x: 15.2510729, y: 15.2510834, z: 15.2510834}
   m_Children:
   - {fileID: 429114}
@@ -663,6 +691,7 @@ Transform:
   - {fileID: 429152}
   - {fileID: 429122}
   - {fileID: 429134}
+  - {fileID: 411702}
   m_Father: {fileID: 429154}
   m_RootOrder: 6
 --- !u!4 &429138
@@ -1342,6 +1371,8 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
+  crosshairTexture: {fileID: 0}
+  crosshairScale: 1
 --- !u!114 &11429112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1355,8 +1386,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRange: 1000
   planetModel: {fileID: 100000, guid: c0cb1b666ee51b54ebd78ec704cf4fc2, type: 2}
+  shipModel: {fileID: 100000, guid: 3af13e22650e8bc4489e33e2942f55f6, type: 2}
   host: {fileID: 129122}
   ship: {fileID: 129118}
+  globe: {fileID: 129152}
+  enemyShip: {fileID: 0}
+  line: {fileID: 12011702}
+  targetScale: 0
 --- !u!114 &11429114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1400,6 +1436,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reference: {fileID: 129118}
+--- !u!120 &12011702
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111702}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 2552fb91de09345b7ae94be2a1f27046, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: .100000001
+    endWidth: .00999999978
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1
 --- !u!124 &12429106
 Behaviour:
   m_ObjectHideFlags: 1
@@ -1429,7 +1498,7 @@ SphereCollider:
   m_GameObject: {fileID: 129152}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
