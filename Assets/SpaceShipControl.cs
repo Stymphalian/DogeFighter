@@ -100,8 +100,17 @@ public class SpaceShipControl : MonoBehaviour {
 		float timeUntilMissileRegen = missileRegenInterval - timeElapsedSinceLastMissileRegen;
 		missileCount.text = "# Missiles: " + currentMissileCount + "\nRegens in: " + timeUntilMissileRegen.ToString("0.0") + "s";
 
+		// Engine Sound
 		float speed = rigidbody.velocity.magnitude;
 		audio.pitch = speed / 200;
+
+		// Aiming
+		if (Input.GetKeyDown ("2")){
+			float maxDistance = 1000;
+			Ray ray = defaultCamera.ScreenPointToRay(Input.mousePosition);
+			Debug.Log(ray);
+			Debug.DrawRay(ray.origin, ray.direction, Color.white, 50, false);
+		}
 	}
 
 	public void Respawn() {
