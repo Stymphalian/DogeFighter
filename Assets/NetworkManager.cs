@@ -168,17 +168,17 @@ public class NetworkManager : MonoBehaviour {
 		Network.Destroy(go.networkView.viewID);
 	}
 
-	static void Destroy(GameObject gameObject) {
+	public static void Destroy(GameObject gameObject) {
 		// just in case there are multiple networkViews on a single object, removeRPCS on all of them
-//		foreach(Component networkViewComponent in gameObject.GetComponents(NetworkView)) {
-//			Network.RemoveRPCs((networkViewComponent as NetworkView).viewID);
-//		}
+		foreach(Component networkViewComponent in gameObject.GetComponents(typeof(NetworkView))){
+			Network.RemoveRPCs((networkViewComponent as NetworkView).viewID);
+		}
 //		
 		NetworkViewID viewID = gameObject.networkView.viewID;
 		Network.Destroy(gameObject);
 	}
 	
-	static GameObject Find(NetworkViewID viewID){
+	public  static GameObject Find(NetworkViewID viewID){
 		NetworkView o = NetworkView.Find(viewID);
 		if (o != null) {
 			return o.gameObject;

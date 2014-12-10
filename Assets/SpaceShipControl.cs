@@ -20,6 +20,9 @@ public class SpaceShipControl : MonoBehaviour {
 	public TextMesh missileCount;
 	public TextMesh healthText;
 
+	public GameObject bulletBurstPrefab;
+	public Transform bulletSpawnPoint;
+
 	public Camera defaultCamera;
 	public Object OVRRig;
 	public GameObject fireMissileExplosion;
@@ -32,6 +35,11 @@ public class SpaceShipControl : MonoBehaviour {
 
 	// player model stuff
 	public int health;
+	public int missleAmmo;
+	public int missleCooldown;
+	public int gunAmmo;
+	public int gunCooldown;
+	public bool deadFlag = false;
 
 	void Awake(){
 		if (networkView.isMine == false)
@@ -59,6 +67,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 	void FixedUpdate () {
 		if( networkView.isMine == false){return;}
+
 		float yaw = Input.GetAxis("Horizontal");
 		float pitch = -Input.GetAxis("Vertical");
 		float roll = Input.GetAxis("Roll");
@@ -82,26 +91,14 @@ public class SpaceShipControl : MonoBehaviour {
 	void Update () {
 		if( networkView.isMine == false){return;}
 
-		if (Input.GetKeyDown ("1") && currentMissileCount > 0) {
-			Vector3 pos = missileHatch.position;
-			GameObject missle1 = (Instantiate (misslePrefab, pos, Quaternion.identity) as GameObject);
-			MissleController m1 = missle1.GetComponent<MissleController> ();
-			m1.Init (missleTarget, 0.75f, 0.5f, this.rigidbody.velocity);
-			GameObject.Instantiate (fireMissileExplosion, missle1.transform.position, Quaternion.identity);
+		if( Input.GetKeyDown("1") ){
+			fireMissle(networkView.viewID,networkView.viewID);
 			currentMissileCount--;
-		} else if ( Input.GetKeyDown("2")){
-			GameObject[] gos = GameObject.FindGameObjectsWithTag("Ship");
-			for ( int i = 0; i < gos.Length; ++i){
-				Debug.Log("gos [" + i + "] networkView.isMine " + gos[i].networkView.isMine);
-				if( gos[i].networkView.isMine == false){
-					gos[i].transform.Find("Camera").GetComponent<MouseLook>().enabled = false;
-				}
-			}
 		} else if (Input.GetKeyDown("3")) {
 			Vector3 pos = bulletHatch.position;
 			GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 			BulletController bulletController = bullet.GetComponent<BulletController> ();
-			bulletController.Init (0.75f, this.rigidbody.velocity);
+			bulletController.Init(0.75f, this.rigidbody.velocity);
 			GameObject.Instantiate (fireMissileExplosion, bullet.transform.position, Quaternion.identity);	// temporarily using fire explosion
 		}
 
@@ -124,38 +121,52 @@ public class SpaceShipControl : MonoBehaviour {
 	
 	[RPC]
 	public void updateHealth(int newHealth){
-		if( Network.isServer){
+		if( networkView.isMine){
 			networkView.RPC("updateHealth",RPCMode.Others, newHealth);
 		}
 		this.health = newHealth;
+		if( this.health < 0){
+			this.health = 0;
+			deadFlag = true;
+		}
 		healthText.text = this.health.ToString();
 	}
-	
-	// send to server actions...
-	[RPC]
-	public void updateHealthAction(int newHealth){
-		if( Network.isClient){
-			networkView.RPC("updateHealthAction",RPCMode.Server);
-		}else if( Network.isServer){
-			updateHealth(newHealth);
-		}
-	}
-	[RPC]
-	public void fireGun(){
-		if( Network.isClient){
-			networkView.RPC("fireGun",RPCMode.Server);
-		}else if( Network.isServer){
-
-		}
-	}
 
 	[RPC]
-	public void fireMissle(GameObject target){
-		if( Network.isClient){
-			networkView.RPC("fireMissle",RPCMode.Server,target);
-		}else if( Network.isServer){
-			fireMissle(target);
+	public void fireGun(int newHealth){
+		Debug.Log("hey the gun fired");
+		if( networkView.isMine){
+			networkView.RPC("fireGun",RPCMode.Others);
 		}
+
+	}
+	[RPC]
+	public void fireMissle(NetworkViewID ownerId,NetworkViewID targetViewId){
+		if (networkView.isMine){
+			networkView.RPC("fireMissle",RPCMode.Others,ownerId,targetViewId);
+		}
+
+		GameObject targetGameObject = NetworkManager.Find(targetViewId);
+		targetGameObject = null;
+		GameObject ownerObject = NetworkManager.Find(ownerId);
+		Vector3 pos = missileHatch.position;
+		GameObject missle1 = (Network.Instantiate(misslePrefab,pos,Quaternion.identity,0) as GameObject);
+		Network.Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity,0);
+
+
+		currentMissileCount--;
+
+		// set the target and stuff
+		MissleController m1 = missle1.GetComponent<MissleController>();
+		m1.Init(ownerObject,targetGameObject,0.75f,0.5f,this.rigidbody.velocity);
+	}
+
+	[RPC]
+	public void respawn(){
+		if( networkView.isMine) {
+			networkView.RPC("respawn", RPCMode.Others);
+		}
+		Respawn();
 	}
 
 	public void Respawn(GameObject box){
