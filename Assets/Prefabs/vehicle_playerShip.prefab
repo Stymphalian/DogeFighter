@@ -1151,8 +1151,13 @@ MonoBehaviour:
   maxSpeed: 10
   tailTrail: {fileID: 19829106}
   useOVR: 0
+  initialMissileCount: 5
+  missileRegenInterval: 3
   misslePrefab: {fileID: 100000, guid: 2451958374f854fea9a83bde415df166, type: 2}
   missleTarget: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
+  velocityText: {fileID: 10229108}
+  anotherText: {fileID: 10229106}
   defaultCamera: {fileID: 2029108}
   OVRRig: {fileID: 129146}
   fireMissileExplosion: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
