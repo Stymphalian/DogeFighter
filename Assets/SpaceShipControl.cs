@@ -21,6 +21,14 @@ public class SpaceShipControl : MonoBehaviour {
 
 	private float initialEmissionRate;
 
+	void Awake(){
+		if (networkView.isMine == false)
+		{
+			defaultCamera.enabled = false; // disable the camera of the non-owned Player;
+			defaultCamera.GetComponent<AudioListener>().enabled = false;// Disables AudioListener of non-owned Player - prevents multiple AudioListeners from being present in scene.
+		}
+	}
+	
 	// Use this for initialization
 	void Start () {
 		rigidbody.maxAngularVelocity = maxAngularVelocity;
@@ -31,6 +39,7 @@ public class SpaceShipControl : MonoBehaviour {
 		} else {
 			Destroy(OVRRig);
 		}
+
 	}
 
 	void FixedUpdate () {
@@ -53,6 +62,7 @@ public class SpaceShipControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if( networkView.isMine == false){return;}
+
 		if( Input.GetKeyDown("1") ){
 			Vector3 pos = missileHatch.position;
 			GameObject missle1 = (Instantiate(misslePrefab,pos,Quaternion.identity) as GameObject);
