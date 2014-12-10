@@ -4,6 +4,7 @@ using System.Collections;
 public class DemoSceneManager : MonoBehaviour {
 
 	public GameObject playerPrefab;
+	public GameObject launchBox;
 
 	public static DemoSceneManager instance;
 	void Awake(){
@@ -28,9 +29,11 @@ public class DemoSceneManager : MonoBehaviour {
 
 //		OnStartGame.Publish(null);
 		if( playerPrefab != null){
+			Debug.Log("Instantiating shit");
 			GameObject p = (Network.Instantiate(playerPrefab,Vector3.zero,Quaternion.identity,0) as GameObject);
+			GameObject l = (Network.Instantiate(launchBox,Vector3.zero,Quaternion.identity,0) as GameObject);
 			SpaceShipControl c = p.GetComponent<SpaceShipControl>();
-			c.Respawn();
+			c.Respawn(l);
 		}
 	}
 	

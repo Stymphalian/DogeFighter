@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SpaceShipControl : MonoBehaviour {
@@ -105,6 +105,9 @@ public class SpaceShipControl : MonoBehaviour {
 		audio.pitch = speed / 200;
 	}
 
+	public void Respawn() {
+		Respawn (null);
+	}
 
 	
 	[RPC]
@@ -153,13 +156,18 @@ public class SpaceShipControl : MonoBehaviour {
 		}
 		Respawn();
 	}
-		
-	public void Respawn(){
-		this.deadFlag = false;
 
-		if( playerSpawnPoint != null){
-
-		}else{
+	public void Respawn(GameObject box){
+		if (box != null || playerSpawnPoint != null) {
+			Debug.Log ("Position within launchbox");
+			if (playerSpawnPoint == null) {
+				playerSpawnPoint = box;
+				playerSpawnPoint.transform.position = Vector3.zero;
+			}
+			this.transform.position = new Vector3 (playerSpawnPoint.transform.position.x - 39,playerSpawnPoint.transform.position.y + 15, 0);
+			this.transform.rotation = Quaternion.AngleAxis (90, Vector3.up);
+		} else {
+			Debug.Log("Position without launchbox");
 			this.transform.position = Vector3.zero;
 		}
 
