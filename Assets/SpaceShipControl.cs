@@ -107,7 +107,7 @@ public class SpaceShipControl : MonoBehaviour {
 	[RPC]
 	public void fireGun(){
 		if( Network.isClient){
-			networkView.RPC("fireGun",RPCMode.Server,Vector3 dir, Vector3 pos);
+			networkView.RPC("fireGun",RPCMode.Server);
 		}else if( Network.isServer){
 
 		}

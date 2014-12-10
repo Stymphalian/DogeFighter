@@ -170,10 +170,10 @@ public class NetworkManager : MonoBehaviour {
 
 	static void Destroy(GameObject gameObject) {
 		// just in case there are multiple networkViews on a single object, removeRPCS on all of them
-		foreach(Component networkViewComponent in gameObject.GetComponents(NetworkView)) {
-			Network.RemoveRPCs((networkViewComponent as NetworkView).viewID);
-		}
-		
+//		foreach(Component networkViewComponent in gameObject.GetComponents(NetworkView)) {
+//			Network.RemoveRPCs((networkViewComponent as NetworkView).viewID);
+//		}
+//		
 		NetworkViewID viewID = gameObject.networkView.viewID;
 		Network.Destroy(gameObject);
 	}
