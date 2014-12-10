@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class SpaceShipControl : MonoBehaviour {
+	public static float BULLET_MAX_HOT_GAUGE = 100.0f;
+	public static float BULLET_TIME_TO_START_COOLING_DOWN = 0.75f;
+
 	public Vector3 acceleration;
 	public float force;
 	public float turnspeed;
@@ -24,7 +27,10 @@ public class SpaceShipControl : MonoBehaviour {
 	public GameObject bulletBurstPrefab;	// temporarily using same prefab as missile explosion. Get new explosion prefab for bullet
 	public Transform bulletHatch;
 	public float bulletFireInterval;
+	public float bulletHotGaugeIncreaseDeltaPerBullet;
+	public float bulletHotGaugeDecreaseDeltaPerSecond;
 	private float timeElapsedSinceLastBulletFire;
+	private float bulletHotGauge;
 
 	public Camera defaultCamera;
 	public Object OVRRig;
@@ -55,6 +61,7 @@ public class SpaceShipControl : MonoBehaviour {
 		currentMissileCount = initialMissileCount;
 		timeElapsedSinceLastMissileRegen = 0.0f;
 		timeElapsedSinceLastBulletFire = 0.0f;
+		bulletHotGauge = 0.0f;
 
 		if (useOVR) {
 			Destroy(defaultCamera.gameObject);
@@ -90,14 +97,29 @@ public class SpaceShipControl : MonoBehaviour {
 	void Update () {
 		if (networkView.isMine == false) {return;}
 
+		timeElapsedSinceLastBulletFire += Time.deltaTime;
+
 		if (Input.GetKeyDown("1") && currentMissileCount > 0) {
 			fireMissle(networkView.viewID,networkView.viewID);
 		} else if (Input.GetKey("3")) {
-			timeElapsedSinceLastBulletFire += Time.deltaTime;
-			if (timeElapsedSinceLastBulletFire >= bulletFireInterval)
+			if (timeElapsedSinceLastBulletFire >= bulletFireInterval && bulletHotGauge < BULLET_MAX_HOT_GAUGE)
 			{
 				timeElapsedSinceLastBulletFire = 0;
 				fireGun(0);
+				bulletHotGauge += bulletHotGaugeIncreaseDeltaPerBullet;
+				if (bulletHotGauge >= BULLET_MAX_HOT_GAUGE)
+				{
+					bulletHotGauge = BULLET_MAX_HOT_GAUGE;
+				}
+			}
+		}
+
+		if (timeElapsedSinceLastBulletFire >= BULLET_TIME_TO_START_COOLING_DOWN) 
+		{
+			bulletHotGauge -= (bulletHotGaugeDecreaseDeltaPerSecond * Time.deltaTime);
+			if (bulletHotGauge <= 0) 
+			{
+				bulletHotGauge = 0;
 			}
 		}
 
