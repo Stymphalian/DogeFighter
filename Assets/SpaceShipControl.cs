@@ -14,6 +14,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 	public GameObject misslePrefab;
 	public GameObject missleTarget; // temporary hardcoded target
+	public GameObject bulletPrefab;
 	public GameObject playerSpawnPoint;
 	public TextMesh velocityText;
 	public TextMesh missileCount;
@@ -23,6 +24,7 @@ public class SpaceShipControl : MonoBehaviour {
 	public Object OVRRig;
 	public GameObject fireMissileExplosion;
 	public Transform missileHatch;
+	public Transform bulletHatch;
 
 	private float initialEmissionRate;
 	private int currentMissileCount;
@@ -87,7 +89,7 @@ public class SpaceShipControl : MonoBehaviour {
 			m1.Init (missleTarget, 0.75f, 0.5f, this.rigidbody.velocity);
 			GameObject.Instantiate (fireMissileExplosion, missle1.transform.position, Quaternion.identity);
 			currentMissileCount--;
-		}else if( Input.GetKeyDown("2")){
+		} else if ( Input.GetKeyDown("2")){
 			GameObject[] gos = GameObject.FindGameObjectsWithTag("Ship");
 			for ( int i = 0; i < gos.Length; ++i){
 				Debug.Log("gos [" + i + "] networkView.isMine " + gos[i].networkView.isMine);
@@ -95,6 +97,12 @@ public class SpaceShipControl : MonoBehaviour {
 					gos[i].transform.Find("Camera").GetComponent<MouseLook>().enabled = false;
 				}
 			}
+		} else if (Input.GetKeyDown("3")) {
+			Vector3 pos = bulletHatch.position;
+			GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
+			BulletController bulletController = bullet.GetComponent<BulletController> ();
+			bulletController.Init (0.75f, this.rigidbody.velocity);
+			GameObject.Instantiate (fireMissileExplosion, bullet.transform.position, Quaternion.identity);	// temporarily using fire explosion
 		}
 
 		timeElapsedSinceLastMissileRegen += Time.deltaTime;
