@@ -32,7 +32,7 @@ public class NetworkManager : MonoBehaviour {
 	public void Play(OnPlay callback){
 		Debug.Log ("Play");
 		MasterServer.ClearHostList();
-		MasterServer.RequestHostList("jordanGame");
+		MasterServer.RequestHostList("com.jordanyu.dogeFighter");
 		shouldConnect = true;
 		onPlayCallback = callback;
 	}
@@ -77,7 +77,7 @@ public class NetworkManager : MonoBehaviour {
 		while( attempts > 0){
 			NetworkConnectionError e =  Network.InitializeServer(32,port,useNat);
 			if(e == NetworkConnectionError.NoError){
-				MasterServer.RegisterHost("jordanGame","dutchBlitz","Here is a comment");
+				MasterServer.RegisterHost("com.jordanyu.dogeFighter","DogeFighter","Here is a comment");
 				break;
 			}else{
 				// try again with new ports?
@@ -166,5 +166,24 @@ public class NetworkManager : MonoBehaviour {
 	public static void DestoryNetworkObject(GameObject go){
 		Network.RemoveRPCs(go.networkView.viewID);
 		Network.Destroy(go.networkView.viewID);
+	}
+
+	static void Destroy(GameObject gameObject) {
+		// just in case there are multiple networkViews on a single object, removeRPCS on all of them
+//		foreach(Component networkViewComponent in gameObject.GetComponents(NetworkView)) {
+//			Network.RemoveRPCs((networkViewComponent as NetworkView).viewID);
+//		}
+//		
+		NetworkViewID viewID = gameObject.networkView.viewID;
+		Network.Destroy(gameObject);
+	}
+	
+	static GameObject Find(NetworkViewID viewID){
+		NetworkView o = NetworkView.Find(viewID);
+		if (o != null) {
+			return o.gameObject;
+		} else {
+			return null;
+		}
 	}
 }
