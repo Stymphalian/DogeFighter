@@ -20,8 +20,7 @@ public class SpaceShipControl : MonoBehaviour {
 	public TextMesh missileCount;
 	public TextMesh healthText;
 
-	public GameObject bulletBurstPrefab;
-	public Transform bulletSpawnPoint;
+	public GameObject bulletBurstPrefab;	// temporarily using same prefab as missile explosion. Get new explosion prefab for bullet
 
 	public Camera defaultCamera;
 	public Object OVRRig;
@@ -35,10 +34,6 @@ public class SpaceShipControl : MonoBehaviour {
 
 	// player model stuff
 	public int health;
-	public int missleAmmo;
-	public int missleCooldown;
-	public int gunAmmo;
-	public int gunCooldown;
 	public bool deadFlag = false;
 
 	void Awake(){
@@ -89,17 +84,12 @@ public class SpaceShipControl : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if( networkView.isMine == false){return;}
+		if (networkView.isMine == false) {return;}
 
-		if( Input.GetKeyDown("1") ){
+		if (Input.GetKeyDown("1") && currentMissileCount > 0) {
 			fireMissle(networkView.viewID,networkView.viewID);
-			currentMissileCount--;
 		} else if (Input.GetKeyDown("3")) {
-			Vector3 pos = bulletHatch.position;
-			GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
-			BulletController bulletController = bullet.GetComponent<BulletController> ();
-			bulletController.Init(0.75f, this.rigidbody.velocity);
-			GameObject.Instantiate (fireMissileExplosion, bullet.transform.position, Quaternion.identity);	// temporarily using fire explosion
+			fireGun(0);
 		}
 
 		timeElapsedSinceLastMissileRegen += Time.deltaTime;
@@ -133,6 +123,7 @@ public class SpaceShipControl : MonoBehaviour {
 		if( networkView.isMine){
 			networkView.RPC("updateHealth",RPCMode.Others, newHealth);
 		}
+
 		this.health = newHealth;
 		if( this.health < 0){
 			this.health = 0;
@@ -148,7 +139,13 @@ public class SpaceShipControl : MonoBehaviour {
 			networkView.RPC("fireGun",RPCMode.Others);
 		}
 
+		Vector3 pos = bulletHatch.position;
+		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
+		BulletController bulletController = bullet.GetComponent<BulletController> ();
+		bulletController.Init(0.75f, this.rigidbody.velocity);
+		GameObject.Instantiate(bulletBurstPrefab, bullet.transform.position, Quaternion.identity);
 	}
+
 	[RPC]
 	public void fireMissle(NetworkViewID ownerId,NetworkViewID targetViewId){
 		if (networkView.isMine){
@@ -161,7 +158,6 @@ public class SpaceShipControl : MonoBehaviour {
 		Vector3 pos = missileHatch.position;
 		GameObject missle1 = (Network.Instantiate(misslePrefab,pos,Quaternion.identity,0) as GameObject);
 		Network.Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity,0);
-
 
 		currentMissileCount--;
 
