@@ -47,6 +47,7 @@ public class SpaceShipControl : MonoBehaviour {
 		float yaw = Input.GetAxis("Horizontal");
 		float pitch = -Input.GetAxis("Vertical");
 		float roll = Input.GetAxis("Roll");
+		Debug.Log (roll);
 
 		float gas = Input.GetAxis("Gas");
 		if (gas > 0) {
