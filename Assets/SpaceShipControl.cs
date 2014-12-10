@@ -47,7 +47,7 @@ public class SpaceShipControl : MonoBehaviour {
 		float yaw = Input.GetAxis("Horizontal");
 		float pitch = -Input.GetAxis("Vertical");
 		float roll = Input.GetAxis("Roll");
-		Debug.Log (roll);
+//		Debug.Log (roll);
 
 		float gas = Input.GetAxis("Gas");
 		if (gas > 0) {
@@ -73,11 +73,21 @@ public class SpaceShipControl : MonoBehaviour {
 		}
 	}
 
+	public void Respawn() {
+		Respawn (null);
+	}
 
-	public void Respawn(){
-		if( playerSpawnPoint != null){
-
-		}else{
+	public void Respawn(GameObject box){
+		if (box != null || playerSpawnPoint != null) {
+			Debug.Log ("Position within launchbox");
+			if (playerSpawnPoint == null) {
+				playerSpawnPoint = box;
+				playerSpawnPoint.transform.position = Vector3.zero;
+			}
+			this.transform.position = new Vector3 (playerSpawnPoint.transform.position.x - 39,playerSpawnPoint.transform.position.y + 15, 0);
+			this.transform.rotation = Quaternion.AngleAxis (90, Vector3.up);
+		} else {
+			Debug.Log("Position without launchbox");
 			this.transform.position = Vector3.zero;
 		}
 
