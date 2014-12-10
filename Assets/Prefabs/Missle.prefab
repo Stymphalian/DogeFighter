@@ -101,7 +101,7 @@ MonoBehaviour:
   homingSensitivity: .100000001
   speed: 100
   target: {fileID: 0}
-  autoDestroyTime: 20
+  autoDestroyTime: 5
   tailTrail: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

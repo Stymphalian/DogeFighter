@@ -9,11 +9,15 @@ public class SpaceShipControl : MonoBehaviour {
 	public float maxSpeed;
 	public ParticleSystem tailTrail;
 	public bool useOVR;
+	public int initialMissileCount;
+	public float missileRegenInterval;
 
 	public GameObject misslePrefab;
 	public GameObject missleTarget; // temporary hardcoded target
 	public GameObject playerSpawnPoint;
-
+	public TextMesh velocityText;
+	public TextMesh missileCount;
+	public TextMesh healthText;
 
 	public GameObject bulletBurstPrefab;
 	public Transform bulletSpawnPoint;
@@ -24,6 +28,8 @@ public class SpaceShipControl : MonoBehaviour {
 	public Transform missileHatch;
 
 	private float initialEmissionRate;
+	private int currentMissileCount;
+	private float timeElapsedSinceLastMissileRegen;
 
 	// player model stuff
 	public int health;
@@ -46,6 +52,8 @@ public class SpaceShipControl : MonoBehaviour {
 	void Start () {
 		rigidbody.maxAngularVelocity = maxAngularVelocity;
 		initialEmissionRate = tailTrail.emissionRate;
+		currentMissileCount = initialMissileCount;
+		timeElapsedSinceLastMissileRegen = 0.0f;
 
 		if (useOVR) {
 			Destroy(defaultCamera.gameObject);
@@ -72,6 +80,9 @@ public class SpaceShipControl : MonoBehaviour {
 
 		rigidbody.AddRelativeTorque(pitch*turnspeed, yaw*turnspeed, roll*turnspeed);
 		rigidbody.AddForce(gas * force * this.transform.forward*10);
+
+		float speed = rigidbody.velocity.magnitude;
+		velocityText.text = "Speed: " + speed.ToString("0.0") + "km/s";
 	}
 
 	// Update is called once per frame
@@ -81,6 +92,17 @@ public class SpaceShipControl : MonoBehaviour {
 		if( Input.GetKeyDown("1") ){
 			fireMissle(networkView.viewID,networkView.viewID);
 		}
+
+		timeElapsedSinceLastMissileRegen += Time.deltaTime;
+		if (timeElapsedSinceLastMissileRegen >= missileRegenInterval) {
+			timeElapsedSinceLastMissileRegen = 0;
+			currentMissileCount++;
+		}
+		float timeUntilMissileRegen = missileRegenInterval - timeElapsedSinceLastMissileRegen;
+		missileCount.text = "# Missiles: " + currentMissileCount + "\nRegens in: " + timeUntilMissileRegen.ToString("0.0") + "s";
+
+		float speed = rigidbody.velocity.magnitude;
+		audio.pitch = speed / 200;
 	}
 
 
@@ -91,11 +113,11 @@ public class SpaceShipControl : MonoBehaviour {
 			networkView.RPC("updateHealth",RPCMode.Others, newHealth);
 		}
 		this.health = newHealth;
-
 		if( this.health < 0){
 			this.health = 0;
 			deadFlag = true;
 		}
+		healthText.text = this.health.ToString();
 	}
 
 	[RPC]
