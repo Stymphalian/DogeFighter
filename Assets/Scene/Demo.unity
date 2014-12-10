@@ -232,7 +232,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11481272, guid: 1f42265c513f50848817b7f9076ab44e, type: 2}
       propertyPath: autoConnect
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f42265c513f50848817b7f9076ab44e, type: 2}
@@ -1459,7 +1459,7 @@ MonoBehaviour:
   serverPortRangeMax: 33000
   serverCreateAttempts: 10
   clientJoinAttempts: 10
-  autoConnect: 1
+  autoConnect: 0
   defaultSceneName: Demo
 --- !u!4 &1433595851
 Transform:
