@@ -16,7 +16,8 @@ public class SpaceShipControl : MonoBehaviour {
 	public GameObject missleTarget; // temporary hardcoded target
 	public GameObject playerSpawnPoint;
 	public TextMesh velocityText;
-	public TextMesh anotherText;
+	public TextMesh missileCount;
+	public TextMesh healthText;
 
 	public Camera defaultCamera;
 	public Object OVRRig;
@@ -72,7 +73,7 @@ public class SpaceShipControl : MonoBehaviour {
 		rigidbody.AddForce(gas * force * this.transform.forward*10);
 
 		float speed = rigidbody.velocity.magnitude;
-		velocityText.text = "Velocity: " + speed.ToString("0.0") + "km/s";
+		velocityText.text = "Speed: " + speed.ToString("0.0") + "km/s";
 	}
 
 	// Update is called once per frame
@@ -102,7 +103,7 @@ public class SpaceShipControl : MonoBehaviour {
 			currentMissileCount++;
 		}
 		float timeUntilMissileRegen = missileRegenInterval - timeElapsedSinceLastMissileRegen;
-		anotherText.text = "# Missiles: " + currentMissileCount + "\n Regens in: " + timeUntilMissileRegen.ToString("0.0") + "s";
+		missileCount.text = "# Missiles: " + currentMissileCount + "\nRegens in: " + timeUntilMissileRegen.ToString("0.0") + "s";
 	}
 
 
@@ -113,6 +114,7 @@ public class SpaceShipControl : MonoBehaviour {
 			networkView.RPC("updateHealth",RPCMode.Others, newHealth);
 		}
 		this.health = newHealth;
+		healthText.text = this.health.ToString();
 	}
 	
 	// send to server actions...
