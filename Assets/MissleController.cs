@@ -6,6 +6,7 @@ public class MissleController : MonoBehaviour {
 	public float homingSensitivity = 0.1f;
 	public float speed = 100;
 	public GameObject target = null;
+	public GameObject owner = null;
 	public float autoDestroyTime = 20.0f;
 	
 	public ParticleSystem tailTrail;
@@ -28,14 +29,15 @@ public class MissleController : MonoBehaviour {
 		return polar;
 	}
 	
-	public void Init(GameObject target,float speed,float sensitivity,Vector3 initialVelocity){
+	public void Init(GameObject owner,GameObject target,float speed,float sensitivity,Vector3 initialVelocity){
+		this.owner = owner;
 		this.target = target;
 		this.speed = speed;
 		this.homingSensitivity = sensitivity;
 		this.rigidbody.velocity = initialVelocity + this.transform.forward*2;
 		//		      tailTrail.emissionRate = 100;
 		
-//		StartCoroutine(AutoExplode(autoDestroyTime));
+		StartCoroutine(AutoExplode(autoDestroyTime));
 	}
 	
 	// Update is called once per frame

@@ -232,7 +232,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11481272, guid: 1f42265c513f50848817b7f9076ab44e, type: 2}
       propertyPath: autoConnect
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f42265c513f50848817b7f9076ab44e, type: 2}
@@ -785,6 +785,7 @@ GameObject:
   - 23: {fileID: 878433416}
   - 135: {fileID: 878433415}
   - 114: {fileID: 878433419}
+  - 148: {fileID: 878433420}
   m_Layer: 0
   m_Name: Sun
   m_TagString: Planet
@@ -868,6 +869,18 @@ MonoBehaviour:
   asteroidModels:
   - {fileID: 100000, guid: 7d5f7699d6d1d48e485ac71126e12061, type: 2}
   exsitedBelt: 
+--- !u!148 &878433420
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 878433414}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 878433418}
+  m_ViewID:
+    m_ID: 4
+    m_Type: 1
 --- !u!1 &921187605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,7 +1413,7 @@ MonoBehaviour:
   serverPortRangeMax: 33000
   serverCreateAttempts: 10
   clientJoinAttempts: 10
-  autoConnect: 0
+  autoConnect: 1
   defaultSceneName: Demo
 --- !u!4 &1433595851
 Transform:
