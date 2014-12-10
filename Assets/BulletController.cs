@@ -3,8 +3,9 @@ using System.Collections;
 
 public class BulletController : MonoBehaviour {
 	public GameObject explosion;
-	public float speed = 100;
-	public float autoDestroyTime = 20.0f;
+	public float speed = 250;
+	public float autoDestroyTime = 5.0f;
+	public int bulletDamage = 20;
 
 	public void Init(float speed,Vector3 initialVelocity){
 		this.speed = speed;
