@@ -72,13 +72,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 429114}
+  - 96: {fileID: 9633294}
   m_Layer: 0
   m_Name: engines_player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &129116
 GameObject:
   m_ObjectHideFlags: 1
@@ -1091,6 +1092,47 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!96 &9633294
+TrailRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129114}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: e667992b28845df99060a8f876d1d11b, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Time: 5
+  m_StartWidth: 1
+  m_EndWidth: 1
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 16777215
+  m_MinVertexDistance: .100000001
+  m_Autodestruct: 0
 --- !u!102 &10229106
 TextMesh:
   serializedVersion: 3
@@ -1153,6 +1195,7 @@ MonoBehaviour:
   useOVR: 0
   misslePrefab: {fileID: 100000, guid: 2451958374f854fea9a83bde415df166, type: 2}
   missleTarget: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
   defaultCamera: {fileID: 2029108}
   OVRRig: {fileID: 129146}
   fireMissileExplosion: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
