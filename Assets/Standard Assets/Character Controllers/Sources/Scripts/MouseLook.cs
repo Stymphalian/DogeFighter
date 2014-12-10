@@ -29,9 +29,12 @@ public class MouseLook : MonoBehaviour {
 	public float maximumY = 60F;
 
 	float rotationY = 0F;
-
+	bool networkIsMine = false;
+	
 	void Update ()
 	{
+		if( networkIsMine == false){return;}
+
 		if (axes == RotationAxes.MouseXAndY)
 		{
 			float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
@@ -56,6 +59,8 @@ public class MouseLook : MonoBehaviour {
 	
 	void Start ()
 	{
+		networkIsMine = this.transform.parent.gameObject.networkView.isMine;
+
 		// Make the rigid body not change rotation
 		if (GetComponent<Rigidbody>())
 			GetComponent<Rigidbody>().freezeRotation = true;

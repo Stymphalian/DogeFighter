@@ -27,10 +27,14 @@ public class SpaceShipControl : MonoBehaviour {
 	private int currentMissileCount;
 	private float timeElapsedSinceLastMissileRegen;
 
+	// player model stuff
+	public int health;
+
 	void Awake(){
 		if (networkView.isMine == false)
 		{
 			defaultCamera.enabled = false; // disable the camera of the non-owned Player;
+			defaultCamera.gameObject.GetComponent<MouseLook>().enabled = false;
 			defaultCamera.GetComponent<AudioListener>().enabled = false;// Disables AudioListener of non-owned Player - prevents multiple AudioListeners from being present in scene.
 		}
 	}
@@ -55,7 +59,7 @@ public class SpaceShipControl : MonoBehaviour {
 		float yaw = Input.GetAxis("Horizontal");
 		float pitch = -Input.GetAxis("Vertical");
 		float roll = Input.GetAxis("Roll");
-		Debug.Log (roll);
+//		Debug.Log (roll);
 
 		float gas = Input.GetAxis("Gas");
 		if (gas > 0) {
@@ -75,13 +79,21 @@ public class SpaceShipControl : MonoBehaviour {
 	void Update () {
 		if( networkView.isMine == false){return;}
 
-		if( Input.GetKeyDown("1") && currentMissileCount > 0){
+		if (Input.GetKeyDown ("1") && currentMissileCount > 0) {
 			Vector3 pos = missileHatch.position;
-			GameObject missle1 = (Instantiate(misslePrefab,pos,Quaternion.identity) as GameObject);
-			MissleController m1 = missle1.GetComponent<MissleController>();
-			m1.Init(missleTarget,0.75f,0.5f,this.rigidbody.velocity);
-			GameObject.Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity);
+			GameObject missle1 = (Instantiate (misslePrefab, pos, Quaternion.identity) as GameObject);
+			MissleController m1 = missle1.GetComponent<MissleController> ();
+			m1.Init (missleTarget, 0.75f, 0.5f, this.rigidbody.velocity);
+			GameObject.Instantiate (fireMissileExplosion, missle1.transform.position, Quaternion.identity);
 			currentMissileCount--;
+		}else if( Input.GetKeyDown("2")){
+			GameObject[] gos = GameObject.FindGameObjectsWithTag("Ship");
+			for ( int i = 0; i < gos.Length; ++i){
+				Debug.Log("gos [" + i + "] networkView.isMine " + gos[i].networkView.isMine);
+				if( gos[i].networkView.isMine == false){
+					gos[i].transform.Find("Camera").GetComponent<MouseLook>().enabled = false;
+				}
+			}
 		}
 
 		timeElapsedSinceLastMissileRegen += Time.deltaTime;
@@ -89,12 +101,48 @@ public class SpaceShipControl : MonoBehaviour {
 			timeElapsedSinceLastMissileRegen = 0;
 			currentMissileCount++;
 		}
-
 		float timeUntilMissileRegen = missileRegenInterval - timeElapsedSinceLastMissileRegen;
 		anotherText.text = "# Missiles: " + currentMissileCount + "\n Regens in: " + timeUntilMissileRegen.ToString("0.0") + "s";
 	}
 
 
+	
+	[RPC]
+	public void updateHealth(int newHealth){
+		if( Network.isServer){
+			networkView.RPC("updateHealth",RPCMode.Others, newHealth);
+		}
+		this.health = newHealth;
+	}
+	
+	// send to server actions...
+	[RPC]
+	public void updateHealthAction(int newHealth){
+		if( Network.isClient){
+			networkView.RPC("updateHealthAction",RPCMode.Server);
+		}else if( Network.isServer){
+			updateHealth(newHealth);
+		}
+	}
+	[RPC]
+	public void fireGun(){
+		if( Network.isClient){
+			networkView.RPC("fireGun",RPCMode.Server);
+		}else if( Network.isServer){
+
+		}
+	}
+
+	[RPC]
+	public void fireMissle(GameObject target){
+		if( Network.isClient){
+			networkView.RPC("fireMissle",RPCMode.Server,target);
+		}else if( Network.isServer){
+			fireMissle(target);
+		}
+	}
+
+	
 	public void Respawn(){
 		if( playerSpawnPoint != null){
 
