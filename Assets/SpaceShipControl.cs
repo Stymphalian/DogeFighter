@@ -104,6 +104,24 @@ public class SpaceShipControl : MonoBehaviour {
 			updateHealth(newHealth);
 		}
 	}
+	[RPC]
+	public void fireGun(){
+		if( Network.isClient){
+			networkView.RPC("fireGun",RPCMode.Server,Vector3 dir, Vector3 pos);
+		}else if( Network.isServer){
+
+		}
+	}
+
+	[RPC]
+	public void fireMissle(GameObject target){
+		if( Network.isClient){
+			networkView.RPC("fireMissle",RPCMode.Server,target);
+		}else if( Network.isServer){
+			fireMissle(target);
+		}
+	}
+
 	
 	public void Respawn(){
 		if( playerSpawnPoint != null){
