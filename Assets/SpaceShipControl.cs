@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class SpaceShipControl : MonoBehaviour {
+	public static float BULLET_MAX_HOT_GAUGE = 100.0f;
+	public static float BULLET_TIME_TO_START_COOLING_DOWN = 0.75f;
+
 	public Vector3 acceleration;
 	public float force;
 	public float turnspeed;
@@ -14,20 +17,26 @@ public class SpaceShipControl : MonoBehaviour {
 
 	public GameObject misslePrefab;
 	public GameObject missleTarget; // temporary hardcoded target
-	public GameObject bulletPrefab;
 	public GameObject playerSpawnPoint;
 	public TextMesh velocityText;
 	public TextMesh missileCount;
 	public TextMesh healthText;
 
+	// Bullet
+	public GameObject bulletPrefab;
 	public GameObject bulletBurstPrefab;	// temporarily using same prefab as missile explosion. Get new explosion prefab for bullet
+	public Transform bulletHatch;
+	public float bulletFireInterval;
+	public float bulletHotGaugeIncreaseDeltaPerBullet;
+	public float bulletHotGaugeDecreaseDeltaPerSecond;
+	private float timeElapsedSinceLastBulletFire;
+	private float bulletHotGauge;
 
 	public Camera defaultCamera;
 	public Object OVRRig;
 	public GameObject fireMissileExplosion;
 	public Transform missileHatch;
-	public Transform bulletHatch;
-
+	
 	private float initialEmissionRate;
 	private int currentMissileCount;
 	private float timeElapsedSinceLastMissileRegen;
@@ -51,6 +60,8 @@ public class SpaceShipControl : MonoBehaviour {
 		initialEmissionRate = tailTrail.emissionRate;
 		currentMissileCount = initialMissileCount;
 		timeElapsedSinceLastMissileRegen = 0.0f;
+		timeElapsedSinceLastBulletFire = 0.0f;
+		bulletHotGauge = 0.0f;
 
 		if (useOVR) {
 			Destroy(defaultCamera.gameObject);
@@ -86,10 +97,30 @@ public class SpaceShipControl : MonoBehaviour {
 	void Update () {
 		if (networkView.isMine == false) {return;}
 
+		timeElapsedSinceLastBulletFire += Time.deltaTime;
+
 		if (Input.GetKeyDown("1") && currentMissileCount > 0) {
 			fireMissle(networkView.viewID,networkView.viewID);
-		} else if (Input.GetKeyDown("3")) {
-			fireGun();
+		} else if (Input.GetKey("3")) {
+			if (timeElapsedSinceLastBulletFire >= bulletFireInterval && bulletHotGauge < BULLET_MAX_HOT_GAUGE)
+			{
+				timeElapsedSinceLastBulletFire = 0;
+				fireGun();
+				bulletHotGauge += bulletHotGaugeIncreaseDeltaPerBullet;
+				if (bulletHotGauge >= BULLET_MAX_HOT_GAUGE)
+				{
+					bulletHotGauge = BULLET_MAX_HOT_GAUGE;
+				}
+			}
+		}
+
+		if (timeElapsedSinceLastBulletFire >= BULLET_TIME_TO_START_COOLING_DOWN) 
+		{
+			bulletHotGauge -= (bulletHotGaugeDecreaseDeltaPerSecond * Time.deltaTime);
+			if (bulletHotGauge <= 0) 
+			{
+				bulletHotGauge = 0;
+			}
 		}
 
 		timeElapsedSinceLastMissileRegen += Time.deltaTime;
