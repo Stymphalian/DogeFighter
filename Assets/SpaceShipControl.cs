@@ -12,6 +12,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 	public GameObject misslePrefab;
 	public GameObject missleTarget; // temporary hardcoded target
+	public GameObject playerSpawnPoint;
 
 	public Camera defaultCamera;
 	public Object OVRRig;
@@ -24,6 +25,7 @@ public class SpaceShipControl : MonoBehaviour {
 	void Start () {
 		rigidbody.maxAngularVelocity = maxAngularVelocity;
 		initialEmissionRate = tailTrail.emissionRate;
+
 		if (useOVR) {
 			Destroy(defaultCamera.gameObject);
 		} else {
@@ -32,7 +34,7 @@ public class SpaceShipControl : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-
+		if( networkView.isMine == false){return;}
 		float yaw = Input.GetAxis("Horizontal");
 		float pitch = -Input.GetAxis("Vertical");
 		float roll = Input.GetAxis("Roll");
@@ -45,11 +47,12 @@ public class SpaceShipControl : MonoBehaviour {
 		}
 
 		rigidbody.AddRelativeTorque(pitch*turnspeed, yaw*turnspeed, roll*turnspeed);
-		rigidbody.AddForce(gas * force * this.transform.forward);
+		rigidbody.AddForce(gas * force * this.transform.forward*10);
 	}
 
 	// Update is called once per frame
 	void Update () {
+		if( networkView.isMine == false){return;}
 		if( Input.GetKeyDown("1") ){
 			Vector3 pos = missileHatch.position;
 			GameObject missle1 = (Instantiate(misslePrefab,pos,Quaternion.identity) as GameObject);
@@ -57,6 +60,19 @@ public class SpaceShipControl : MonoBehaviour {
 			m1.Init(missleTarget,0.75f,0.5f,this.rigidbody.velocity);
 			GameObject.Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity);
 		}
-	
+	}
+
+
+	public void Respawn(){
+		if( playerSpawnPoint != null){
+
+		}else{
+			this.transform.position = Vector3.zero;
+		}
+
+		// have the sky box follow me again...
+		if( SkyboxFollow.instance != null){
+			SkyboxFollow.instance.following = this.gameObject;
+		}
 	}
 }
