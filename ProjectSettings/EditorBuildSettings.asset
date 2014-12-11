@@ -8,8 +8,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/xx_Scenes/Main.unity
   - enabled: 1
+    path: Assets/Scene/MenuScreen.unity
+  - enabled: 1
     path: Assets/Scene/Lobby.unity
   - enabled: 1
     path: Assets/Scene/Demo.unity
-  - enabled: 1
-    path: Assets/Scene/MenuScreen.unity
