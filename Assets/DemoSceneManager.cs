@@ -21,8 +21,10 @@ public class DemoSceneManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {}
 
+	public EventSubscriber ev = new EventSubscriber();
 	[RPC]
 	public void StartGame(Vector3 postition){
+		ev.Publish(null);
 		if(Network.isServer){
 			// prevent anyone from connection after the game starts
 			Network.maxConnections = 0;
@@ -31,6 +33,7 @@ public class DemoSceneManager : MonoBehaviour {
 				if (player != Network.player) {
 					Debug.Log("Not the server");
 					Vector3 planetPosition = getStartingPlanetPosition();
+					Debug.Log("planetp =  "+ planetPosition);
 					networkView.RPC("StartGame",player, planetPosition);
 				}
 			}

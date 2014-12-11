@@ -69,13 +69,12 @@ public class LobbySceneManager : MonoBehaviour {
 			Notification.instance.Message(seconds.ToString(),1.0f);
 		}
 
-
-//		if( Network.isServer){
-//			DemoSceneManager.instance.StartGame(Vector3.zero);
-//		}
-//		// turn off all the stuff...
 		this.enabled = false;
 		PlayZoneTrigger.instance.enabled = false;
+		if( Network.isServer){
+			DemoSceneManager.instance.StartGame(Vector3.zero);
+		}
+//		// turn off all the stuff...
 
 //		Application.LoadLevel(gameSceneName);
 	}

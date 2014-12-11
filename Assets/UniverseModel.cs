@@ -21,6 +21,10 @@ public class UniverseModel : MonoBehaviour {
 		targetScale = globe.transform.localScale.x;
 		scaleToRangeRatio = visionRange * targetScale;
 
+		DemoSceneManager.instance.ev.Sub (this.gameObject,handler);
+	}
+
+	void handler(GameObject self, System.Object data){
 		GameObject[] ships = GameObject.FindGameObjectsWithTag ("Ship");
 		foreach (GameObject shipFound in ships) {
 			if (shipFound != ship) {

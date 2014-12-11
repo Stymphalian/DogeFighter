@@ -101,7 +101,7 @@ public class SpaceShipControl : MonoBehaviour {
 		//for testing purposes only!
 
 		rigidbody.AddRelativeTorque(pitch*turnspeed, yaw*turnspeed, roll*turnspeed);
-		rigidbody.AddForce(gas * force * this.transform.forward*10);
+		rigidbody.AddForce(gas * force * this.transform.forward);
 
 		float speed = rigidbody.velocity.magnitude;
 		velocityText.text = "Speed: " + speed.ToString("0.0") + "km/s";
