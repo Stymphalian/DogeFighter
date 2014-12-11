@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  m_Layer: 0
+  m_Name: aimingObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &109270
 GameObject:
   m_ObjectHideFlags: 1
@@ -432,6 +447,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: .00345314341, z: .0204888731}
+  m_LocalScale: {x: .173317507, y: .173317686, z: .173317686}
+  m_Children: []
+  m_Father: {fileID: 429154}
+  m_RootOrder: 0
 --- !u!4 &409270
 Transform:
   m_ObjectHideFlags: 1
@@ -443,7 +470,7 @@ Transform:
   m_LocalScale: {x: .000521268346, y: .000521268463, z: .000521268521}
   m_Children: []
   m_Father: {fileID: 429154}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &411702
 Transform:
   m_ObjectHideFlags: 1
@@ -479,7 +506,7 @@ Transform:
   m_LocalScale: {x: .000521265611, y: .000521265494, z: .000521265494}
   m_Children: []
   m_Father: {fileID: 429154}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &429110
 Transform:
   m_ObjectHideFlags: 1
@@ -593,7 +620,7 @@ Transform:
   - {fileID: 481470}
   - {fileID: 429110}
   m_Father: {fileID: 429154}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &429128
 Transform:
   m_ObjectHideFlags: 1
@@ -605,7 +632,7 @@ Transform:
   m_LocalScale: {x: .000521265552, y: .000521265494, z: .000521265494}
   m_Children: []
   m_Father: {fileID: 429154}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &429130
 Transform:
   m_ObjectHideFlags: 1
@@ -658,7 +685,7 @@ Transform:
   - {fileID: 429134}
   - {fileID: 411702}
   m_Father: {fileID: 429154}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &429138
 Transform:
   m_ObjectHideFlags: 1
@@ -709,7 +736,7 @@ Transform:
   - {fileID: 429138}
   - {fileID: 429124}
   m_Father: {fileID: 429154}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &429148
 Transform:
   m_ObjectHideFlags: 1
@@ -725,7 +752,19 @@ Transform:
   - {fileID: 429120}
   - {fileID: 429144}
   m_Father: {fileID: 429154}
-  m_RootOrder: 1
+  m_RootOrder: 2
+--- !u!4 &429150
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129150}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
+  m_LocalPosition: {x: 0, y: 0, z: -.34807241}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429114}
+  m_RootOrder: 0
 --- !u!4 &429152
 Transform:
   m_ObjectHideFlags: 1
@@ -748,6 +787,7 @@ Transform:
   m_LocalPosition: {x: 0, y: -.0199237801, z: -.11821571}
   m_LocalScale: {x: 5.76975775, y: 5.76975155, z: 5.76975155}
   m_Children:
+  - {fileID: 400000}
   - {fileID: 429126}
   - {fileID: 429148}
   - {fileID: 429128}
@@ -1331,13 +1371,14 @@ MonoBehaviour:
   bulletPrefab: {fileID: 190144, guid: 24edc68cdb8ec4f2f9dfda1b31bde9be, type: 2}
   bulletBurstPrefab: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
   bulletHatch: {fileID: 429110}
-  bulletFireInterval: .150000006
-  bulletHotGaugeIncreaseDeltaPerBullet: 4
-  bulletHotGaugeDecreaseDeltaPerSecond: 20
+  bulletFireInterval: 0
+  bulletHotGaugeIncreaseDeltaPerBullet: 0
+  bulletHotGaugeDecreaseDeltaPerSecond: 0
   defaultCamera: {fileID: 2029108}
   OVRRig: {fileID: 129146}
   fireMissileExplosion: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
   missileHatch: {fileID: 481470}
+  aimingObject: {fileID: 400000}
   health: 0
   deadFlag: 0
 --- !u!114 &11429110
@@ -1358,7 +1399,7 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
-  crosshairTexture: {fileID: 0}
+  crosshairTexture: {fileID: 2800000, guid: 0565332d540dbcf4d9a01224a867cee8, type: 3}
   crosshairScale: 1
 --- !u!114 &11429112
 MonoBehaviour:

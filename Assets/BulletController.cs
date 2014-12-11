@@ -7,10 +7,12 @@ public class BulletController : MonoBehaviour {
 	public float autoDestroyTime = 5.0f;
 	public int bulletDamage = 20;
 
-	public void Init(float speed,Vector3 initialVelocity){
+	public void Init(float speed,Vector3 initialVelocity, Collider collider){
 		this.speed = speed;
 		this.rigidbody.velocity = initialVelocity + this.transform.forward * 2;
-		
+
+		Physics.IgnoreCollision(this.collider, collider);
+
 		StartCoroutine(AutoExplode(autoDestroyTime));
 	}
 
