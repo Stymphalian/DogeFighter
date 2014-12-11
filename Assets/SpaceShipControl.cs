@@ -108,7 +108,6 @@ public class SpaceShipControl : MonoBehaviour {
 			tailTrail.emissionRate = 0;
 		}
 		//for testing purposes only!
-		Debug.Log (gas);
 		rigidbody.AddRelativeTorque(pitch*turnspeed, yaw*turnspeed, roll*turnspeed);
 		rigidbody.AddForce(gas * force * this.transform.forward);
 
