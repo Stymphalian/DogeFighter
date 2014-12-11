@@ -44,8 +44,6 @@ public class LobbySceneManager : MonoBehaviour {
 		if( Network.connections.Length == Config.MAX_NUM_PLAYERS){
 			playZoneTriggerActive = true;
 			if( Network.isServer){
-
-
 				// active the playZoneTriggers
 				PlayZoneTrigger.instance.gameObject.SetActive(true);
 			}

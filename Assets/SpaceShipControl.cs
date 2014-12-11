@@ -244,7 +244,10 @@ public class SpaceShipControl : MonoBehaviour {
 	// run by both the clients and servers..
 	public IEnumerator delayRespawn() {
 		messageText.gameObject.SetActive(true);
-		yield return new WaitForSeconds(3.0f);
+		if( DemoSceneManager.instance.inGameFlag){
+			yield return new WaitForSeconds(3.0f);
+			Respawn();
+		}
 		messageText.gameObject.SetActive(false);
 		this.health = 100;
 		if(Network.isServer){
@@ -252,7 +255,6 @@ public class SpaceShipControl : MonoBehaviour {
 		}
 
 		deadFlag = false;
-		Respawn();
 	}
 
 	[RPC]
