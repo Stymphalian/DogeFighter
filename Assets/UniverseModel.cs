@@ -67,6 +67,7 @@ public class UniverseModel : MonoBehaviour {
 			line.SetPosition(0, model.transform.position);
 		}
 		line.SetPosition (1, globe.transform.position);
+		line.materials[0].SetFloat ("_Displacement", Random.Range(0,100)/100f);
 		Vector3 pos = transform.localPosition;
 		pos.y = currentScale * 0.046f;
 		transform.localPosition = pos;
