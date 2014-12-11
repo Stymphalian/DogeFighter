@@ -25,7 +25,6 @@ public class PlayZoneTrigger : MonoBehaviour {
 			}
 		}
 
-
 		if( count >= targetNumPlayers){
 			LobbySceneManager.instance.startGame();
 			keepLookingFlag = false;
@@ -41,7 +40,7 @@ public class PlayZoneTrigger : MonoBehaviour {
 			count++;
 		}
 
-		if( count == targetNumPlayers ){
+		if( count >= targetNumPlayers ){
 			LobbySceneManager.instance.startGame();
 			keepLookingFlag = false;
 		}

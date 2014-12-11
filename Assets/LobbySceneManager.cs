@@ -6,7 +6,6 @@ public class LobbySceneManager : MonoBehaviour {
 	public static LobbySceneManager instance;
 	public GameObject playerShipPrefab;
 	public GameObject spawnPoint;
-	public const int MAX_NUM_PLAYERS = 1;
 	public string gameSceneName = "Demo";
 	public int timeDown = 3;
 	public GameObject beginGameZone;
@@ -34,7 +33,7 @@ public class LobbySceneManager : MonoBehaviour {
 		
 	// called on the server when a player is connected...
 	void OnPlayerConnected(NetworkPlayer player){
-		if( Network.connections.Length == LobbySceneManager.MAX_NUM_PLAYERS){
+		if( Network.connections.Length == Config.MAX_NUM_PLAYERS){
 			if( Network.isServer){
 				// no more players can connect...
 				Network.maxConnections = 0;
