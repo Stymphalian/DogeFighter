@@ -226,9 +226,10 @@ public class SpaceShipControl : MonoBehaviour {
 		yield return new WaitForSeconds(3.0f);
 		messageText.gameObject.SetActive(false);
 		this.health = 100;
-		if(Network.isServer){
+
+//		if(Network.isServer){
 			updateHealth (this.health);
-		}
+//		}
 
 		deadFlag = false;
 		Respawn();
