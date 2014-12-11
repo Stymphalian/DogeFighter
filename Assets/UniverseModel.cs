@@ -59,7 +59,7 @@ public class UniverseModel : MonoBehaviour {
 		float currentScale = globe.transform.localScale.x;
 		visionRange = scaleToRangeRatio / currentScale;
 		Vector3 pos = transform.localPosition;
-		pos.y = currentScale * 0.066f;
+		pos.y = currentScale * 0.046f;
 		transform.localPosition = pos;
 
 		zoomed = Input.GetButton("Info");
