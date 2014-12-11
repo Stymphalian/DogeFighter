@@ -6,9 +6,9 @@ public class NetworkManager : MonoBehaviour {
 	public int serverPortRangeMax = 33000;
 	public int serverCreateAttempts = 10;
 	public int clientJoinAttempts = 10;
-	public bool autoConnect= false;
+	
 	public bool alwaysNewServer = false;
-	public string defaultSceneName = "Demo";
+	public bool disableClientConnections = false;
 	
 	public delegate void OnPlay();
 	
@@ -21,13 +21,7 @@ public class NetworkManager : MonoBehaviour {
 	}
 	
 	void Start(){
-		if( autoConnect && Network.isServer == false){
-//			Play(_startDefaultGame);
-		}
-	}
-	private void _startDefaultGame(){
-//		LobbyUI.instance.startGame();
-		Application.LoadLevel(defaultSceneName);
+		
 	}
 	
 	public void Play(OnPlay callback){
@@ -63,12 +57,6 @@ public class NetworkManager : MonoBehaviour {
 		if(hostFound == false){
 			startNewServer();
 		}
-		
-//		// use the callback and do shit.
-//		if( onPlayCallback != null){
-//			onPlayCallback();
-//		}
-		
 	}
 	private void startNewServer(){
 		Debug.Log ("starting new server");
@@ -127,7 +115,7 @@ public class NetworkManager : MonoBehaviour {
 	void OnDisconnectedFromServer(){
 		Debug.Log ("You have been disconnected from the server");
 		if( Network.isClient){
-//			Notification.instancetance.Message("Disconnectconnected from server",-1);
+			//			Notification.instancetance.Message("Disconnectconnected from server",-1);
 			StartCoroutine(quitAfterSeconds(3));
 		}
 	}
@@ -151,13 +139,13 @@ public class NetworkManager : MonoBehaviour {
 	
 	void OnServerInitialized(){
 		// use the callback and do shit.
-//		if( onPlayCallback != null){
-//			onPlayCallback();
-//		}
 		Debug.Log ("Server Initialized");
 		if( onPlayCallback != null){
 			onPlayCallback();
 			onPlayCallback = null;
+		}
+		if(disableClientConnections ){
+			Network.maxConnections = 0;
 		}
 	}
 	
@@ -169,20 +157,19 @@ public class NetworkManager : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	//---------------------
 	// static methods
 	public static void DestoryNetworkObject(GameObject go){
 		Network.RemoveRPCs(go.networkView.viewID);
 		Network.Destroy(go.networkView.viewID);
 	}
-
+	
 	public static void Destroy(GameObject gameObject) {
 		// just in case there are multiple networkViews on a single object, removeRPCS on all of them
 		foreach(Component networkViewComponent in gameObject.GetComponents(typeof(NetworkView))){
 			Network.RemoveRPCs((networkViewComponent as NetworkView).viewID);
 		}
-//		NetworkViewID viewID = gameObject.networkView.viewID;
 		Network.Destroy(gameObject);
 	}
 	
