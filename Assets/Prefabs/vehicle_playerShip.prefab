@@ -465,6 +465,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &126258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 426258}
+  - 23: {fileID: 2326258}
+  - 102: {fileID: 10226258}
+  m_Layer: 0
+  m_Name: MessageLabel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -814,6 +831,7 @@ Transform:
   - {fileID: 400048}
   - {fileID: 400046}
   - {fileID: 400044}
+  - {fileID: 426258}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400054
@@ -828,6 +846,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400046}
   m_RootOrder: 0
+--- !u!4 &426258
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -31.7373753, y: 65.5353775, z: 194.393356}
+  m_LocalScale: {x: .00499997614, y: .00499997241, z: .00499997241}
+  m_Children: []
+  m_Father: {fileID: 400052}
+  m_RootOrder: 4
 --- !u!20 &2000000
 Camera:
   m_ObjectHideFlags: 1
@@ -1098,6 +1128,26 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: 0032a80be83d44fbd82ea7c11ebfe9ef, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!23 &2326258
+Renderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126258}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 48a0c388fb57946bba4f2898c0d49a3f, type: 3}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1388,6 +1438,27 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!102 &10226258
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126258}
+  m_Text: MESSAGE
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 12
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 48a0c388fb57946bba4f2898c0d49a3f, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190335
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1495,8 +1566,10 @@ MonoBehaviour:
   velocityText: {fileID: 10200004}
   missileCount: {fileID: 10200002}
   healthText: {fileID: 10200000}
+  messageText: {fileID: 10226258}
   bulletPrefab: {fileID: 190144, guid: 24edc68cdb8ec4f2f9dfda1b31bde9be, type: 2}
   bulletBurstPrefab: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
+  bulletHotGaugeProgressBar: {fileID: 0}
   bulletHatch: {fileID: 400022}
   bulletFireInterval: 0
   bulletHotGaugeIncreaseDeltaPerBullet: 0
