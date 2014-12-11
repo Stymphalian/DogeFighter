@@ -62,7 +62,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 
 	void SetHighlight(bool focused) {
-		renderer.materials [0].SetFloat ("_Outline", focused ? 2 : 0);
+		renderer.materials [0].SetFloat ("_Outline", focused ? 0.02f : 0);
 	}
 
 	void Awake(){
@@ -144,7 +144,6 @@ public class SpaceShipControl : MonoBehaviour {
 				DemoSceneManager.instance.StartGame(Vector3.zero);
 			}
 		}
-		if (Input.GetButtonDown("Fire1") && currentMissileCount > 0) {
 			Vector3 dir = crosshair.transform.position - aimingCameraTransform.position;
 			dir.Normalize ();
 			RaycastHit hit = new RaycastHit();
@@ -157,19 +156,24 @@ public class SpaceShipControl : MonoBehaviour {
 					SpaceShipControl control = ship.GetComponent<SpaceShipControl>();
 					focused = control;
 					focused.SetHighlight(true);
-
-					NetworkViewID id = ship.networkView.viewID;
-					fireMissle (this.networkView.viewID, id);
-					Debug.Log(this.networkView.viewID);
-					Debug.Log(id);
+				} else {
+					if (focused != null) {
+						focused.SetHighlight(false);
+					}
+					focused = null;
 				}
 			} else {
 				if (focused != null) {
 					focused.SetHighlight(false);
 				}
+				focused = null;
 			}
-
-
+		
+		if (Input.GetButtonDown("Fire1") && currentMissileCount > 0 && focused) {
+			NetworkViewID id = focused.gameObject.networkView.viewID;
+			fireMissle (this.networkView.viewID, id);
+			Debug.Log(this.networkView.viewID);
+			Debug.Log(id);
 		} else if (Input.GetButton("Fire2")) {
 //			health -= 5;
 //			updateHealth(health);
@@ -243,10 +247,9 @@ public class SpaceShipControl : MonoBehaviour {
 		yield return new WaitForSeconds(3.0f);
 		messageText.gameObject.SetActive(false);
 		this.health = 100;
-
-//		if(Network.isServer){
+		if(Network.isServer){
 			updateHealth (this.health);
-//		}
+		}
 
 		deadFlag = false;
 		Respawn();
