@@ -173,7 +173,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11481272, guid: 1f42265c513f50848817b7f9076ab44e, type: 2}
       propertyPath: autoConnect
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11481272, guid: 1f42265c513f50848817b7f9076ab44e, type: 2}
       propertyPath: alwaysNewServer
@@ -1521,6 +1521,7 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:
@@ -1636,9 +1637,9 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 927bfc014c7f573469ab81e85d00ae20, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .0649999976
+  m_Volume: .057
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1
@@ -1801,7 +1802,7 @@ MonoBehaviour:
   serverPortRangeMax: 33000
   serverCreateAttempts: 10
   clientJoinAttempts: 10
-  autoConnect: 1
+  autoConnect: 0
   alwaysNewServer: 1
   defaultSceneName: Demo
 --- !u!4 &1433595851
