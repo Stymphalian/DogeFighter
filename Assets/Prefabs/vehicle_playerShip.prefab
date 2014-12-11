@@ -17,6 +17,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &111702
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 411702}
+  - 120: {fileID: 12011702}
+  m_Layer: 0
+  m_Name: line
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &129106
 GameObject:
   m_ObjectHideFlags: 1
@@ -58,7 +74,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 429110}
   m_Layer: 0
-  m_Name: hatch
+  m_Name: bulletHatch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,6 +143,7 @@ GameObject:
   - 64: {fileID: 6429106}
   - 114: {fileID: 11429106}
   - 148: {fileID: 14872548}
+  - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: vehicle_playerShip
   m_TagString: Ship
@@ -433,6 +450,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &181470
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 481470}
+  m_Layer: 0
+  m_Name: missileHatch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &409270
 Transform:
   m_ObjectHideFlags: 1
@@ -444,6 +476,18 @@ Transform:
   m_LocalScale: {x: .000521268346, y: .000521268463, z: .000521268521}
   m_Children: []
   m_Father: {fileID: 429154}
+  m_RootOrder: 3
+--- !u!4 &411702
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429136}
   m_RootOrder: 3
 --- !u!4 &429106
 Transform:
@@ -476,11 +520,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .767956674, y: -.0431263186, z: -3.43675137}
+  m_LocalPosition: {x: -.760999978, y: -.0430000015, z: -3.43700004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 429126}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &429112
 Transform:
   m_ObjectHideFlags: 1
@@ -526,7 +570,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 446.648071, y: -548.661377, z: 1730.15759}
+  m_LocalPosition: {x: 434.31369, y: 29.9914875, z: -1729.69678}
   m_LocalScale: {x: 15.2510729, y: 15.2510834, z: 15.2510834}
   m_Children:
   - {fileID: 429114}
@@ -581,6 +625,7 @@ Transform:
   m_LocalPosition: {x: .000423590012, y: -.00127010001, z: .0130120004}
   m_LocalScale: {x: .0100000016, y: .0100000007, z: .0100000007}
   m_Children:
+  - {fileID: 481470}
   - {fileID: 429110}
   m_Father: {fileID: 429154}
   m_RootOrder: 0
@@ -646,6 +691,7 @@ Transform:
   - {fileID: 429152}
   - {fileID: 429122}
   - {fileID: 429134}
+  - {fileID: 411702}
   m_Father: {fileID: 429154}
   m_RootOrder: 6
 --- !u!4 &429138
@@ -770,6 +816,18 @@ Transform:
   - {fileID: 429136}
   m_Father: {fileID: 429118}
   m_RootOrder: 3
+--- !u!4 &481470
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181470}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .767956674, y: -.0431263186, z: -3.43675137}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429126}
+  m_RootOrder: 0
 --- !u!20 &2029106
 Camera:
   m_ObjectHideFlags: 1
@@ -934,7 +992,7 @@ Renderer:
   m_GameObject: {fileID: 129118}
   m_Enabled: 0
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
@@ -1104,6 +1162,64 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129138}
   m_Enabled: 1
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129118}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 5da0b319aada2433a8e95e654c63e428, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: .5
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!92 &9229106
 Behaviour:
   m_ObjectHideFlags: 1
@@ -1230,11 +1346,18 @@ MonoBehaviour:
   velocityText: {fileID: 10229108}
   missileCount: {fileID: 10209270}
   healthText: {fileID: 10229106}
+  bulletPrefab: {fileID: 190144, guid: 24edc68cdb8ec4f2f9dfda1b31bde9be, type: 2}
+  bulletBurstPrefab: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
+  bulletHatch: {fileID: 429110}
+  bulletFireInterval: .150000006
+  bulletHotGaugeIncreaseDeltaPerBullet: 4
+  bulletHotGaugeDecreaseDeltaPerSecond: 20
   defaultCamera: {fileID: 2029108}
   OVRRig: {fileID: 129146}
   fireMissileExplosion: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
-  missileHatch: {fileID: 429110}
+  missileHatch: {fileID: 481470}
   health: 0
+  deadFlag: 0
 --- !u!114 &11429110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1253,6 +1376,8 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
+  crosshairTexture: {fileID: 0}
+  crosshairScale: 1
 --- !u!114 &11429112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1266,8 +1391,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRange: 1000
   planetModel: {fileID: 100000, guid: c0cb1b666ee51b54ebd78ec704cf4fc2, type: 2}
+  shipModel: {fileID: 100000, guid: 3af13e22650e8bc4489e33e2942f55f6, type: 2}
   host: {fileID: 129122}
   ship: {fileID: 129118}
+  globe: {fileID: 129152}
+  enemyShip: {fileID: 0}
+  line: {fileID: 12011702}
+  targetScale: 0
 --- !u!114 &11429114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1311,6 +1441,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reference: {fileID: 129118}
+--- !u!120 &12011702
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111702}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 2552fb91de09345b7ae94be2a1f27046, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: .100000001
+    endWidth: .00999999978
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1
 --- !u!124 &12429106
 Behaviour:
   m_ObjectHideFlags: 1
@@ -1340,7 +1503,7 @@ SphereCollider:
   m_GameObject: {fileID: 129152}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}

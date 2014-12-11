@@ -40,6 +40,12 @@ public class LobbyUI : MonoBehaviour {
 		(this.transform as RectTransform).offsetMax = (this.transform as RectTransform).offsetMin = Vector2.zero;
 	}
 
+	void Update() {
+		if (Input.GetKeyDown ("s")) {
+			startGame();
+		}
+	}
+
 	[RPC]
 	public void startGame(){
 		if( Network.isServer){
@@ -64,7 +70,7 @@ public class LobbyUI : MonoBehaviour {
 			// here we should start the game..
 		}
 	}
-	
+
 	void OnConnectedToServer(){
 		Debug.Log ("OnConnectedToServer");
 		connectedCount = Network.connections.Length + 1;
