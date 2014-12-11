@@ -119,6 +119,9 @@ public class SpaceShipControl : MonoBehaviour {
 	void Update () {
 		if (networkView.isMine == false || deadFlag) {return;}
 
+		// Fire missles
+
+
 		timeElapsedSinceLastBulletFire += Time.deltaTime;
 		if (Input.GetKeyDown("0")) {
 			if (Network.isServer) {
@@ -137,6 +140,19 @@ public class SpaceShipControl : MonoBehaviour {
 				bulletHotGauge += bulletHotGaugeIncreaseDeltaPerBullet;
 				if (bulletHotGauge >= BULLET_MAX_HOT_GAUGE) {
 					bulletHotGauge = BULLET_MAX_HOT_GAUGE;
+				}
+			}
+		} else if (Input.GetKeyDown("f")){
+			Vector3 dir = crosshair.transform.position - aimingCameraTransform.position;
+			dir.Normalize ();
+			RaycastHit hit = new RaycastHit();
+			if (Physics.Raycast (aimingCameraTransform.position, dir, out hit))
+			{
+				Debug.Log(hit.collider.gameObject.tag);
+				if (hit.collider.gameObject.tag == "Hitbox") {
+					GameObject ship = hit.collider.gameObject.GetComponent<Hitbox>().ship;
+					NetworkViewID id = ship.networkView.viewID;
+					Debug.Log (id);
 				}
 			}
 		}
