@@ -112,7 +112,11 @@ public class SpaceShipControl : MonoBehaviour {
 		if (networkView.isMine == false) {return;}
 
 		timeElapsedSinceLastBulletFire += Time.deltaTime;
-
+		if (Input.GetKeyDown("0")) {
+			if (Network.isServer) {
+				DemoSceneManager.instance.StartGame(Vector3.zero);
+			}
+		}
 		if (Input.GetKeyDown ("1") && currentMissileCount > 0) {
 			fireMissle (networkView.viewID, networkView.viewID);
 		} else if (Input.GetKey ("3")) {
