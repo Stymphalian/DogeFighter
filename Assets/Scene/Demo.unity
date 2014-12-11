@@ -1808,7 +1808,6 @@ MonoBehaviour:
   clientJoinAttempts: 10
   alwaysNewServer: 1
   disableClientConnections: 1
-  defaultSceneName: Demo
 --- !u!4 &1433595851
 Transform:
   m_ObjectHideFlags: 0
