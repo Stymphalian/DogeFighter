@@ -23,6 +23,8 @@ public class SpaceShipControl : MonoBehaviour {
 	public TextMesh missileCount;
 	public TextMesh healthText;
 	public TextMesh messageText;
+	public TextMesh livesText;
+
 
 
 	// Bullet
@@ -50,6 +52,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 	// player model stuff
 	public int health;
+	public int lives;
 	public bool deadFlag = false;
 
 
@@ -76,7 +79,8 @@ public class SpaceShipControl : MonoBehaviour {
 		bulletHotGauge = 0.0f;
 		health = 100;
 		messageText.gameObject.SetActive(false);
-
+		lives = 3;
+		livesText.text = "Lives: 3";
 
 		
 		if (useOVR) {
@@ -203,6 +207,8 @@ public class SpaceShipControl : MonoBehaviour {
 				deadFlag = true;
 				Debug.Log("You died!");
 				setCockpitMessage("YOU DIED.");
+				this.lives--;
+				livesText.text = "Lives: " + this.lives.ToString();
 				DemoSceneManager.instance.reduceLives(Network.player);
 				StartCoroutine(delayRespawn());
 			} else if (this.health > 0) {
