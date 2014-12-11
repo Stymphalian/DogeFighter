@@ -42,12 +42,15 @@ public class DemoSceneManager : MonoBehaviour {
 			GameObject p = (Network.Instantiate(playerPrefab,Vector3.zero,Quaternion.identity,0) as GameObject);
 			GameObject l = (Network.Instantiate(launchBox,Vector3.zero,Quaternion.identity,0) as GameObject);
 			SpaceShipControl c = p.GetComponent<SpaceShipControl>();
-			if (Network.isServer) {
-				l.transform.position = getStartingPlanetPosition();
-				Debug.Log(l.transform.position);
-			}
+			Vector3 launchPadPosition;
+			if (Network.isServer)
+				launchPadPosition = getStartingPlanetPosition();
 			else
-				l.transform.position = postition;
+				launchPadPosition = postition;
+
+			launchPadPosition = new Vector3(launchPadPosition.x, launchPadPosition.y + 50, launchPadPosition.z);
+
+			l.transform.position = launchPadPosition;
 			c.Respawn(l);
 		}
 	}
