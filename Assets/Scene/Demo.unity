@@ -1941,8 +1941,8 @@ MonoBehaviour:
   planets:
   - {fileID: 1559625751}
   - {fileID: 1646994550}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1752388223}
+  - {fileID: 1307042981}
   usedPlanets: 00000000
   inGameFlag: 0
 --- !u!4 &1384163481
