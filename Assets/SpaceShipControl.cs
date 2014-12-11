@@ -37,7 +37,7 @@ public class SpaceShipControl : MonoBehaviour {
 	private float initialXPos;
 
 	public Camera defaultCamera;
-	public Object OVRRig;
+	public GameObject OVRRig;
 	public GameObject fireMissileExplosion;
 	public Transform missileHatch;
 	public Transform aimingObject;
@@ -75,7 +75,11 @@ public class SpaceShipControl : MonoBehaviour {
 		messageText.gameObject.SetActive(false);
 
 
+		
 		if (useOVR) {
+			if (networkView.isMine) {
+				OVRRig.SetActive(true);
+			}
 			Destroy(defaultCamera.gameObject);
 		} else {
 			Destroy(OVRRig);

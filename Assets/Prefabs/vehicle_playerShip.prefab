@@ -1646,7 +1646,7 @@ MonoBehaviour:
   maxAngularVelocity: 2
   maxSpeed: 10
   tailTrail: {fileID: 19829106}
-  useOVR: 0
+  useOVR: 1
   initialMissileCount: 5
   missileRegenInterval: 3
   misslePrefab: {fileID: 100000, guid: 2451958374f854fea9a83bde415df166, type: 2}
