@@ -193,7 +193,6 @@ public class SpaceShipControl : MonoBehaviour {
 	[RPC]
 	public void updateHealth(int newHealth){
 		Debug.Log ("Updating health: " + newHealth);
-
 		Debug.Log("My health");
 		this.health = newHealth;
 
@@ -208,7 +207,6 @@ public class SpaceShipControl : MonoBehaviour {
 			livesText.text = "Lives: " + this.lives.ToString();
 
 			if( Network.isServer){
-
 				DemoSceneManager.instance.reduceLives(Network.player);
 			}
 

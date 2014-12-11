@@ -60,7 +60,7 @@ GameObject:
   - 4: {fileID: 400006}
   - 135: {fileID: 13500000}
   - 114: {fileID: 11400002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Aiming hitbox
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
