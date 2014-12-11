@@ -44,7 +44,7 @@ GameObject:
   - 23: {fileID: 2300002}
   - 102: {fileID: 10200000}
   m_Layer: 0
-  m_Name: Health
+  m_Name: Lives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ GameObject:
   - 4: {fileID: 400006}
   - 135: {fileID: 13500000}
   - 114: {fileID: 11400002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Aiming hitbox
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -484,6 +484,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &141700
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 441700}
+  - 23: {fileID: 2341700}
+  - 102: {fileID: 10241700}
+  m_Layer: 0
+  m_Name: Health
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &154682
 GameObject:
   m_ObjectHideFlags: 1
@@ -565,12 +582,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_LocalRotation: {x: .072136417, y: -.122162536, z: -.00992942229, w: .989835382}
-  m_LocalPosition: {x: -.00639999984, y: -.000950000016, z: .0293899998}
-  m_LocalScale: {x: .000521265611, y: .000521265494, z: .000521265494}
+  m_LocalRotation: {x: .0721360296, y: -.122163042, z: -.00992900413, w: .989835382}
+  m_LocalPosition: {x: -.00639000023, y: .00455000019, z: .0302000009}
+  m_LocalScale: {x: .000521268288, y: .000521268521, z: .000521268463}
   m_Children: []
   m_Father: {fileID: 429154}
-  m_RootOrder: 5
+  m_RootOrder: 10
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -626,7 +643,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.00218000007, y: .00171999994, z: .0241199993}
+  m_LocalPosition: {x: -.00127000001, y: .00341999996, z: .0253899992}
   m_LocalScale: {x: .000521268288, y: .000521268521, z: .000521268463}
   m_Children: []
   m_Father: {fileID: 429154}
@@ -906,13 +923,26 @@ Transform:
   - {fileID: 429148}
   - {fileID: 429128}
   - {fileID: 409270}
-  - {fileID: 400004}
+  - {fileID: 441700}
   - {fileID: 462054}
   - {fileID: 429146}
   - {fileID: 429136}
   - {fileID: 429108}
+  - {fileID: 400004}
   m_Father: {fileID: 429118}
   m_RootOrder: 3
+--- !u!4 &441700
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141700}
+  m_LocalRotation: {x: .072136417, y: -.122162536, z: -.00992942229, w: .989835382}
+  m_LocalPosition: {x: -.00639999984, y: -.000950000016, z: .0293899998}
+  m_LocalScale: {x: .000521265611, y: .000521265494, z: .000521265494}
+  m_Children: []
+  m_Father: {fileID: 429154}
+  m_RootOrder: 5
 --- !u!4 &454682
 Transform:
   m_ObjectHideFlags: 1
@@ -1247,6 +1277,26 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!23 &2341700
+Renderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141700}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 48a0c388fb57946bba4f2898c0d49a3f, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!23 &2354682
 Renderer:
   m_ObjectHideFlags: 1
@@ -1552,7 +1602,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_Text: 'Health: 100'
+  m_Text: 'Lives: 3'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1607,7 +1657,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 48a0c388fb57946bba4f2898c0d49a3f, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190335
 --- !u!102 &10229108
 TextMesh:
   serializedVersion: 3
@@ -1616,6 +1666,27 @@ TextMesh:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129128}
   m_Text: 'Speed: 100km/s'
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 12
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 48a0c388fb57946bba4f2898c0d49a3f, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!102 &10241700
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141700}
+  m_Text: 'Health: 100'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1679,8 +1750,9 @@ MonoBehaviour:
   globeObject: {fileID: 0}
   velocityText: {fileID: 10229108}
   missileCount: {fileID: 10209270}
-  healthText: {fileID: 10200000}
+  healthText: {fileID: 10241700}
   messageText: {fileID: 10229106}
+  livesText: {fileID: 10200000}
   bulletPrefab: {fileID: 190144, guid: 24edc68cdb8ec4f2f9dfda1b31bde9be, type: 2}
   bulletBurstPrefab: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
   bulletHotGaugeProgressBar: {fileID: 154682}
@@ -1695,6 +1767,7 @@ MonoBehaviour:
   aimingCameraTransform: {fileID: 0}
   crosshair: {fileID: 0}
   health: 0
+  lives: 0
   deadFlag: 0
 --- !u!114 &11429110
 MonoBehaviour:

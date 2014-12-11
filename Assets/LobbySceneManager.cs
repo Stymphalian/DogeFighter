@@ -34,6 +34,10 @@ public class LobbySceneManager : MonoBehaviour {
 		
 	// called on the server when a player is connected...
 	void OnPlayerConnected(NetworkPlayer player){
+		instructions ();
+		if (Network.isServer) {
+			networkView.RPC("instructions",RPCMode.Others);
+		}
 		if( playZoneTriggerActive == true){return;}
 		if( Network.connections.Length == Config.MAX_NUM_PLAYERS){
 			playZoneTriggerActive = true;
@@ -45,6 +49,24 @@ public class LobbySceneManager : MonoBehaviour {
 				PlayZoneTrigger.instance.gameObject.SetActive(true);
 			}
 		}
+	}
+
+	[RPC]
+	public void instructions() {
+		Debug.Log("displaying instructions");
+		StartCoroutine(displayInstructions());
+	}
+
+	IEnumerator displayInstructions(){
+		Notification.instance.Message ("Welcome to DOGEFIGHTERS");
+		yield return new WaitForSeconds (3.0f);
+		Notification.instance.Message ("Both players have connected");
+		yield return new WaitForSeconds (3.0f);
+		Notification.instance.Message ("Fly to the sun start!");
+		yield return new WaitForSeconds (3.0f);
+		Notification.instance.Message ("Have fun! :)");
+		yield return new WaitForSeconds (3.0f);
+		Notification.instance.hideMessage ();
 	}
 
 	[RPC]

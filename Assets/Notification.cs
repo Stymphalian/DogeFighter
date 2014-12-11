@@ -12,6 +12,15 @@ public class Notification : MonoBehaviour {
 		text.text = "";
 		this.gameObject.SetActive(false);
 	}
+
+	public void hideMessage() {
+		this.gameObject.SetActive(false);
+	}
+
+	public void Message(string msg) {
+		this.gameObject.SetActive(true);
+		text.text = msg;
+	}
 	
 	public void Message(string msg, float time){
 		this.gameObject.SetActive(true);

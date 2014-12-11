@@ -23,6 +23,8 @@ public class SpaceShipControl : MonoBehaviour {
 	public TextMesh missileCount;
 	public TextMesh healthText;
 	public TextMesh messageText;
+	public TextMesh livesText;
+
 
 
 	// Bullet
@@ -50,6 +52,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 	// player model stuff
 	public int health;
+	public int lives;
 	public bool deadFlag = false;
 
 
@@ -76,7 +79,8 @@ public class SpaceShipControl : MonoBehaviour {
 		bulletHotGauge = 0.0f;
 		health = 100;
 		messageText.gameObject.SetActive(false);
-
+		lives = 3;
+		livesText.text = "Lives: 3";
 
 		
 		if (useOVR) {
@@ -129,7 +133,22 @@ public class SpaceShipControl : MonoBehaviour {
 			}
 		}
 		if (Input.GetButtonDown("Fire1") && currentMissileCount > 0) {
-			fireMissle (networkView.viewID, networkView.viewID);
+			Vector3 dir = crosshair.transform.position - aimingCameraTransform.position;
+			dir.Normalize ();
+			RaycastHit hit = new RaycastHit();
+			if (Physics.Raycast (aimingCameraTransform.position, dir, out hit))
+			{
+				Debug.Log(hit.collider.gameObject.tag);
+				if (hit.collider.gameObject.tag == "Hitbox") {
+					GameObject ship = hit.collider.gameObject.GetComponent<Hitbox>().ship;
+					NetworkViewID id = ship.networkView.viewID;
+					fireMissle (this.networkView.viewID, id);
+					Debug.Log(this.networkView.viewID);
+					Debug.Log(id);
+				}
+			}
+
+
 		} else if (Input.GetButton("Fire2")) {
 //			health -= 5;
 //			updateHealth(health);
@@ -140,19 +159,6 @@ public class SpaceShipControl : MonoBehaviour {
 				bulletHotGauge += bulletHotGaugeIncreaseDeltaPerBullet;
 				if (bulletHotGauge >= BULLET_MAX_HOT_GAUGE) {
 					bulletHotGauge = BULLET_MAX_HOT_GAUGE;
-				}
-			}
-		} else if (Input.GetKeyDown("f")){
-			Vector3 dir = crosshair.transform.position - aimingCameraTransform.position;
-			dir.Normalize ();
-			RaycastHit hit = new RaycastHit();
-			if (Physics.Raycast (aimingCameraTransform.position, dir, out hit))
-			{
-				Debug.Log(hit.collider.gameObject.tag);
-				if (hit.collider.gameObject.tag == "Hitbox") {
-					GameObject ship = hit.collider.gameObject.GetComponent<Hitbox>().ship;
-					NetworkViewID id = ship.networkView.viewID;
-					Debug.Log (id);
 				}
 			}
 		}
@@ -196,6 +202,9 @@ public class SpaceShipControl : MonoBehaviour {
 			deadFlag = true;
 			Debug.Log("You died!");
 			setCockpitMessage("YOU DIED.");
+
+			this.lives--;
+			livesText.text = "Lives: " + this.lives.ToString();
 
 			if( Network.isServer){
 				DemoSceneManager.instance.reduceLives(Network.player);
