@@ -55,8 +55,16 @@ public class SpaceShipControl : MonoBehaviour {
 	public int lives;
 	public bool deadFlag = false;
 
+	private SpaceShipControl focused;
+
 
 	public static SpaceShipControl instance;
+
+
+	void SetHighlight(bool focused) {
+		renderer.materials [0].SetFloat ("_Outline", focused ? 2 : 0);
+	}
+
 	void Awake(){
 		if (networkView.isMine == false)
 		{
@@ -145,10 +153,19 @@ public class SpaceShipControl : MonoBehaviour {
 				Debug.Log(hit.collider.gameObject.tag);
 				if (hit.collider.gameObject.tag == "Hitbox") {
 					GameObject ship = hit.collider.gameObject.GetComponent<Hitbox>().ship;
+
+					SpaceShipControl control = ship.GetComponent<SpaceShipControl>();
+					focused = control;
+					focused.SetHighlight(true);
+
 					NetworkViewID id = ship.networkView.viewID;
 					fireMissle (this.networkView.viewID, id);
 					Debug.Log(this.networkView.viewID);
 					Debug.Log(id);
+				}
+			} else {
+				if (focused != null) {
+					focused.SetHighlight(false);
 				}
 			}
 
