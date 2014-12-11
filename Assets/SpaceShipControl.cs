@@ -92,7 +92,7 @@ public class SpaceShipControl : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if( networkView.isMine == false){return;}
+		if( networkView.isMine == false || deadFlag){return;}
 
 		float yaw = Input.GetAxis("Horizontal");
 		float pitch = -Input.GetAxis("Vertical");
@@ -116,7 +116,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (networkView.isMine == false) {return;}
+		if (networkView.isMine == false || deadFlag) {return;}
 
 		timeElapsedSinceLastBulletFire += Time.deltaTime;
 		if (Input.GetKeyDown("0")) {
@@ -178,14 +178,16 @@ public class SpaceShipControl : MonoBehaviour {
 		if( networkView.isMine){
 			Debug.Log("My health");
 			this.health = newHealth;
-			healthText.text = this.health.ToString();
-			if( this.health <= 0){
+			if( this.health <= 0 && !deadFlag){
 				this.health = 0;
+				healthText.text = this.health.ToString();
 				deadFlag = true;
 				Debug.Log("You died!");
 				setCockpitMessage("YOU DIED.");
-//				DemoSceneManager.instance.incrementScore(Network.player);
+				DemoSceneManager.instance.reduceLives(Network.player);
 				StartCoroutine(delayRespawn());
+			} else if (this.health > 0) {
+				healthText.text = this.health.ToString();
 			}
 
 			networkView.RPC("updateHealth",RPCMode.Others, newHealth);

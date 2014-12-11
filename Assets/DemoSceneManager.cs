@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class DemoSceneManager : MonoBehaviour {
@@ -9,6 +10,7 @@ public class DemoSceneManager : MonoBehaviour {
 	public GameObject[] planets;
 	public static DemoSceneManager instance;
 	public bool[] usedPlanets = new bool[4] {false,false,false,false};
+	public Dictionary<NetworkPlayer, int> playerLives = new Dictionary<NetworkPlayer, int>();
 	void Awake(){
 		DemoSceneManager.instance = this;
 	}
@@ -28,13 +30,15 @@ public class DemoSceneManager : MonoBehaviour {
 		if(Network.isServer){
 			// prevent anyone from connection after the game starts
 			Network.maxConnections = 0;
-			
+			playerLives[Network.player] = 3;
+
 			foreach (NetworkPlayer player in Network.connections) {
 				if (player != Network.player) {
 					Debug.Log("Not the server");
 					Vector3 planetPosition = getStartingPlanetPosition();
 					Debug.Log("planetp =  "+ planetPosition);
 					networkView.RPC("StartGame",player, planetPosition);
+					playerLives[player] = 3;
 				}
 			}
 			
@@ -103,6 +107,19 @@ public class DemoSceneManager : MonoBehaviour {
 		Debug.Log ("planet:" + planet);
 		usedPlanets[planet] = true;
 		return planets[planet].transform.position;
+	}
+
+	[RPC]
+	public void reduceLives(NetworkPlayer player) {
+		if (Network.isServer) {
+			playerLives [player]--;
+			Debug.Log("Remaining lives:" + playerLives [player]);
+			if (playerLives [player] <= 0) {
+				Debug.Log ("END GAME");
+			}
+		} else {
+			networkView.RPC("reduceLives",RPCMode.Server, player);
+		}
 	}
 
 }
