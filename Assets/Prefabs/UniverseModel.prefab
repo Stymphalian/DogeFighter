@@ -220,6 +220,8 @@ MonoBehaviour:
   enemyShip: {fileID: 0}
   line: {fileID: 12050754}
   targetScale: .00499999989
+  globezoomLimit: 175
+  scaleToRangeRatio: .589999974
 --- !u!114 &11450756
 MonoBehaviour:
   m_ObjectHideFlags: 1
