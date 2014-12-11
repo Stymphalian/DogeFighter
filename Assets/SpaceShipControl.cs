@@ -108,7 +108,6 @@ public class SpaceShipControl : MonoBehaviour {
 			tailTrail.emissionRate = 0;
 		}
 		//for testing purposes only!
-
 		rigidbody.AddRelativeTorque(pitch*turnspeed, yaw*turnspeed, roll*turnspeed);
 		rigidbody.AddForce(gas * force * this.transform.forward);
 
@@ -126,12 +125,12 @@ public class SpaceShipControl : MonoBehaviour {
 				DemoSceneManager.instance.StartGame(Vector3.zero);
 			}
 		}
-		if (Input.GetMouseButtonDown(1) && currentMissileCount > 0) {
+		if (Input.GetButtonDown("Fire1") && currentMissileCount > 0) {
 			fireMissle (networkView.viewID, networkView.viewID);
-		} else if (Input.GetMouseButton(0)) {
-			health -= 5;
-			updateHealth(health);
-			Debug.Log("damaging self");
+		} else if (Input.GetButton("Fire2")) {
+//			health -= 5;
+//			updateHealth(health);
+//			Debug.Log("damaging self");
 			if (timeElapsedSinceLastBulletFire >= bulletFireInterval && bulletHotGauge < BULLET_MAX_HOT_GAUGE) {
 				timeElapsedSinceLastBulletFire = 0;
 				fireGun ();
