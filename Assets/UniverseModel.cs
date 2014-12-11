@@ -13,7 +13,7 @@ public class UniverseModel : MonoBehaviour {
 	public GameObject enemyShip;
 	public LineRenderer line;
 
-	private bool zoomed = true;
+	private bool zoomed = false;
 	public float targetScale;
 	public float globezoomLimit = 175;
 	public float scaleToRangeRatio;
@@ -72,9 +72,9 @@ public class UniverseModel : MonoBehaviour {
 		pos.y = currentScale * 0.046f;
 		transform.localPosition = pos;
 
-		zoomed = Input.GetButton("Info");
+		zoomed = Input.GetButtonDown("Info") ? !zoomed : zoomed;
 		
-		line.renderer.enabled = zoomed;
+		//line.renderer.enabled = zoomed;
 		if (zoomed) {
 						targetScale = 0.1f;
 				} else {

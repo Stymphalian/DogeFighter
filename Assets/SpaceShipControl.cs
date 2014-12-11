@@ -18,6 +18,7 @@ public class SpaceShipControl : MonoBehaviour {
 	public GameObject misslePrefab;
 	public GameObject missleTarget; // temporary hardcoded target
 	public GameObject playerSpawnPoint;
+	public GameObject globeObject;
 	public TextMesh velocityText;
 	public TextMesh missileCount;
 	public TextMesh healthText;
@@ -56,6 +57,7 @@ public class SpaceShipControl : MonoBehaviour {
 	void Awake(){
 		if (networkView.isMine == false)
 		{
+			Destroy(globeObject);
 			defaultCamera.enabled = false; // disable the camera of the non-owned Player;
 			defaultCamera.gameObject.GetComponent<MouseLook>().enabled = false;
 			defaultCamera.GetComponent<AudioListener>().enabled = false;// Disables AudioListener of non-owned Player - prevents multiple AudioListeners from being present in scene.
