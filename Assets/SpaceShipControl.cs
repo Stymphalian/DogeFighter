@@ -204,10 +204,11 @@ public class SpaceShipControl : MonoBehaviour {
 			Debug.Log("You died!");
 			setCockpitMessage("YOU DIED.");
 
-
 			this.lives--;
 			livesText.text = "Lives: " + this.lives.ToString();
+
 			if( Network.isServer){
+
 				DemoSceneManager.instance.reduceLives(Network.player);
 			}
 
