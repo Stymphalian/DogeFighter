@@ -66,7 +66,7 @@ public class MissleController : MonoBehaviour {
 		Debug.Log("MissleController OnTriggerEnter");
 		
 		var player = collider.gameObject.GetComponent<SpaceShipControl>();
-		if (player) {
+		if (player && player != SpaceShipControl.instance) {
 			Debug.Log("Missile hit a player");
 			player.onHit(this.missileDamage);
 		}
