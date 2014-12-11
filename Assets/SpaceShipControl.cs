@@ -210,7 +210,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 		// Engine Sound
 		float speed = rigidbody.velocity.magnitude;
-		audio.pitch = speed / 200;
+		audio.pitch = speed / 50;
 //		Debug.Log (audio.pitch);
 
 	}
