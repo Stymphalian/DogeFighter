@@ -6,9 +6,8 @@ public class NetworkManager : MonoBehaviour {
 	public int serverPortRangeMax = 33000;
 	public int serverCreateAttempts = 10;
 	public int clientJoinAttempts = 10;
-	
+	public bool autoConnect= false;
 	public bool alwaysNewServer = false;
-	public bool disableClientConnections = false;
 	public string defaultSceneName = "Demo";
 	
 	public delegate void OnPlay();
@@ -22,7 +21,9 @@ public class NetworkManager : MonoBehaviour {
 	}
 	
 	void Start(){
-
+		if( autoConnect && Network.isServer == false){
+//			Play(_startDefaultGame);
+		}
 	}
 	private void _startDefaultGame(){
 //		LobbyUI.instance.startGame();
@@ -150,13 +151,13 @@ public class NetworkManager : MonoBehaviour {
 	
 	void OnServerInitialized(){
 		// use the callback and do shit.
+//		if( onPlayCallback != null){
+//			onPlayCallback();
+//		}
 		Debug.Log ("Server Initialized");
 		if( onPlayCallback != null){
 			onPlayCallback();
 			onPlayCallback = null;
-		}
-		if(disableClientConnections ){
-			Network.maxConnections = 0;
 		}
 	}
 	
@@ -181,8 +182,7 @@ public class NetworkManager : MonoBehaviour {
 		foreach(Component networkViewComponent in gameObject.GetComponents(typeof(NetworkView))){
 			Network.RemoveRPCs((networkViewComponent as NetworkView).viewID);
 		}
-//		
-		NetworkViewID viewID = gameObject.networkView.viewID;
+//		NetworkViewID viewID = gameObject.networkView.viewID;
 		Network.Destroy(gameObject);
 	}
 	
