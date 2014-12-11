@@ -1806,14 +1806,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: {x: 0, y: 0, z: .330000013}
-  force: 10.1499996
+  force: 20
   turnspeed: 20
   maxAngularVelocity: 2
   maxSpeed: 10
   tailTrail: {fileID: 19829106}
   useOVR: 0
-  initialMissileCount: 5
-  missileRegenInterval: 3
+  initialMissileCount: 7
+  missileRegenInterval: 9
   misslePrefab: {fileID: 100000, guid: 2451958374f854fea9a83bde415df166, type: 2}
   missleTarget: {fileID: 0}
   playerSpawnPoint: {fileID: 0}

@@ -78,6 +78,7 @@ public class SpaceShipControl : MonoBehaviour {
 			instance = this;
 		}
 	}
+
 	
 	// Use this for initialization
 	void Start () {
@@ -231,7 +232,7 @@ public class SpaceShipControl : MonoBehaviour {
 			this.lives--;
 			livesText.text = "Lives: " + this.lives.ToString();
 
-			if( Network.isServer){
+			if( Network.isServer && DemoSceneManager.instance.inGameFlag){
 				DemoSceneManager.instance.reduceLives(Network.player);
 			}
 
@@ -253,9 +254,8 @@ public class SpaceShipControl : MonoBehaviour {
 		this.currentMissileCount = initialMissileCount;
 		bulletHotGauge = 0;
 
-		if(Network.isServer){
-			updateHealth (this.health);
-		}
+
+		updateHealth (this.health);
 
 		deadFlag = false;
 	}
