@@ -207,10 +207,11 @@ public class SpaceShipControl : MonoBehaviour {
 		if (box != null || playerSpawnPoint != null) {
 			Debug.Log ("Position within launchbox");
 			if (playerSpawnPoint == null) {
+				Debug.Log("HERE");
+				Debug.Log(box.transform.position);
 				playerSpawnPoint = box;
-				playerSpawnPoint.transform.position = Vector3.zero;
 			}
-			this.transform.position = new Vector3 (playerSpawnPoint.transform.position.x - 39,playerSpawnPoint.transform.position.y + 15, 0);
+			this.transform.position = new Vector3 (playerSpawnPoint.transform.position.x - 39,playerSpawnPoint.transform.position.y + 15, playerSpawnPoint.transform.position.z);
 			this.transform.rotation = Quaternion.AngleAxis (90, Vector3.up);
 		} else {
 			Debug.Log("Position without launchbox");
