@@ -36,14 +36,15 @@ public class LobbySceneManager : MonoBehaviour {
 	void OnPlayerConnected(NetworkPlayer player){
 		instructions ();
 		if (Network.isServer) {
+			// no more players can connect...
+			Network.maxConnections = 0;
 			networkView.RPC("instructions",RPCMode.Others);
 		}
 		if( playZoneTriggerActive == true){return;}
 		if( Network.connections.Length == Config.MAX_NUM_PLAYERS){
 			playZoneTriggerActive = true;
 			if( Network.isServer){
-				// no more players can connect...
-				Network.maxConnections = 0;
+
 
 				// active the playZoneTriggers
 				PlayZoneTrigger.instance.gameObject.SetActive(true);
