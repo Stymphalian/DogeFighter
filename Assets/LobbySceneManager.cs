@@ -6,10 +6,10 @@ public class LobbySceneManager : MonoBehaviour {
 	public static LobbySceneManager instance;
 	public GameObject playerShipPrefab;
 	public GameObject spawnPoint;
-	public const int MAX_NUM_PLAYERS = 1;
 	public string gameSceneName = "Demo";
 	public int timeDown = 3;
 	public GameObject beginGameZone;
+	private bool playZoneTriggerActive = false;
 
 	void Awake(){
 		LobbySceneManager.instance = this;
@@ -25,16 +25,20 @@ public class LobbySceneManager : MonoBehaviour {
 		Network.Instantiate(playerShipPrefab,spawnPoint.transform.position,Quaternion.identity,0);
 
 		if(Network.isServer){
+			Debug.LogError("I am the server");
 			// do nothign, we are waiting for other players.
 			// wiating for players...
 		}else if(Network.isClient){
+			Debug.LogError("I am the client");
 			// create a ship for the player to fly in for now...
 		}
 	}
 		
 	// called on the server when a player is connected...
 	void OnPlayerConnected(NetworkPlayer player){
-		if( Network.connections.Length == LobbySceneManager.MAX_NUM_PLAYERS){
+		if( playZoneTriggerActive == true){return;}
+		if( Network.connections.Length == Config.MAX_NUM_PLAYERS){
+			playZoneTriggerActive = true;
 			if( Network.isServer){
 				// no more players can connect...
 				Network.maxConnections = 0;
@@ -64,7 +68,15 @@ public class LobbySceneManager : MonoBehaviour {
 			seconds -= 1;
 			Notification.instance.Message(seconds.ToString(),1.0f);
 		}
-		
+
+
+//		if( Network.isServer){
+//			DemoSceneManager.instance.StartGame(Vector3.zero);
+//		}
+//		// turn off all the stuff...
+//		this.gameObject.SetActive(false);
+//		PlayZoneTrigger.instance.gameObject.SetActive(false);
+
 		Application.LoadLevel(gameSceneName);
 	}
 }

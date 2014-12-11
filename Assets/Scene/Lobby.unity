@@ -751,11 +751,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0081847e6e2f0457da53d26a19b841a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerShipPrefab: {fileID: 129118, guid: 244c6ad319b65d647afc34815d56bef5, type: 2}
+  playerShipPrefab: {fileID: 100052, guid: 2f2c6878b4f4d4a338f16e46b7c682a6, type: 2}
   spawnPoint: {fileID: 1559625751}
   gameSceneName: Demo
   timeDown: 3
-  beginGameZone: {fileID: 0}
+  beginGameZone: {fileID: 1378832883}
 --- !u!4 &1384163481
 Transform:
   m_ObjectHideFlags: 0

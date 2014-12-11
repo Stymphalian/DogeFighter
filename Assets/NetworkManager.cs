@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class NetworkManager : MonoBehaviour {
-	public const int MAX_NUM_PLAYERS = 2;
 	public int serverPortRangeMin = 32000;
 	public int serverPortRangeMax = 33000;
 	public int serverCreateAttempts = 10;
@@ -52,7 +51,7 @@ public class NetworkManager : MonoBehaviour {
 			Debug.Log("connectedPlayers : " + hostData[i].connectedPlayers);
 			Debug.Log("PlayerLimit : " + hostData[i].playerLimit);
 			
-			if(hostData[i].connectedPlayers < NetworkManager.MAX_NUM_PLAYERS &&
+			if(hostData[i].connectedPlayers < Config.MAX_NUM_PLAYERS &&
 			   hostData[i].playerLimit > 1 )
 			{
 				hostFound = true;
@@ -121,6 +120,7 @@ public class NetworkManager : MonoBehaviour {
 		// use the callback and do shit.
 		if( onPlayCallback != null){
 			onPlayCallback();
+			onPlayCallback = null;
 		}
 	}
 	
@@ -157,6 +157,7 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log ("Server Initialized");
 		if( onPlayCallback != null){
 			onPlayCallback();
+			onPlayCallback = null;
 		}
 	}
 	
