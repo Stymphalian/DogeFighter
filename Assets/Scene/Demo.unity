@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac81813c7a80c384a95e86b240114c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 129118, guid: 244c6ad319b65d647afc34815d56bef5, type: 2}
+  playerPrefab: {fileID: 100052, guid: 2f2c6878b4f4d4a338f16e46b7c682a6, type: 2}
   launchBox: {fileID: 127466, guid: e35f158baebcf458ab513ece067fce5e, type: 2}
   planets:
   - {fileID: 1559625751}
