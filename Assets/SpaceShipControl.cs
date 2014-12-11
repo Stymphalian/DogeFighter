@@ -64,6 +64,8 @@ public class SpaceShipControl : MonoBehaviour {
 			defaultCamera.enabled = false; // disable the camera of the non-owned Player;
 			defaultCamera.gameObject.GetComponent<MouseLook>().enabled = false;
 			defaultCamera.GetComponent<AudioListener>().enabled = false;// Disables AudioListener of non-owned Player - prevents multiple AudioListeners from being present in scene.
+
+			this.renderer.enabled = true; // we want to render the other player ship's model
 		}else{
 			instance = this;
 		}
@@ -222,7 +224,10 @@ public class SpaceShipControl : MonoBehaviour {
 		yield return new WaitForSeconds(3.0f);
 		messageText.gameObject.SetActive(false);
 		this.health = 100;
-//		updateHealth (this.health);
+		if(Network.isServer){
+			updateHealth (this.health);
+		}
+
 		deadFlag = false;
 		Respawn();
 	}
@@ -260,8 +265,10 @@ public class SpaceShipControl : MonoBehaviour {
 	[RPC]
 	private void fireMissleOthers(NetworkViewID ownerID, NetworkViewID targetViewID, Vector3 pos, Vector3 vel){
 		GameObject targetGameObject = NetworkManager.Find(targetViewID);
-		targetGameObject = null;
-
+		if( targetGameObject == null){
+			Debug.LogError("hey that object doesn't exist");
+			return;
+		}
 		GameObject ownerObject = NetworkManager.Find(ownerID);
 		GameObject missle1 = (Network.Instantiate(misslePrefab,pos,Quaternion.identity,0) as GameObject);
 		Network.Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity,0);
@@ -301,7 +308,7 @@ public class SpaceShipControl : MonoBehaviour {
 		}
 
 		// have the sky box follow me again...
-		if( SkyboxFollow.instance != null){
+		if(networkView.isMine && SkyboxFollow.instance != null){
 			SkyboxFollow.instance.following = this.gameObject;
 		}
 	}
