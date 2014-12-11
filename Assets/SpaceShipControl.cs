@@ -189,42 +189,41 @@ public class SpaceShipControl : MonoBehaviour {
 //		Debug.Log (audio.pitch);
 
 	}
-
-	public void Respawn() {
-		Respawn (null);
-	}
-
 	
 	[RPC]
 	public void updateHealth(int newHealth){
 		Debug.Log ("Updating health: " + newHealth);
-		if( networkView.isMine){
-			Debug.Log("My health");
-			this.health = newHealth;
-			if( this.health <= 0 && !deadFlag){
-				this.health = 0;
-				healthText.text = this.health.ToString();
-				deadFlag = true;
-				Debug.Log("You died!");
-				setCockpitMessage("YOU DIED.");
-				this.lives--;
-				livesText.text = "Lives: " + this.lives.ToString();
+
+		Debug.Log("My health");
+		this.health = newHealth;
+
+		if( this.health <= 0 && !deadFlag){
+			this.health = 0;
+			healthText.text = this.health.ToString();
+			deadFlag = true;
+			Debug.Log("You died!");
+			setCockpitMessage("YOU DIED.");
+
+
+			this.lives--;
+			livesText.text = "Lives: " + this.lives.ToString();
+			if( Network.isServer){
 				DemoSceneManager.instance.reduceLives(Network.player);
-				StartCoroutine(delayRespawn());
-			} else if (this.health > 0) {
-				healthText.text = this.health.ToString();
 			}
 
-			networkView.RPC("updateHealth",RPCMode.Others, newHealth);
+			StartCoroutine(delayRespawn());
+		} else if (this.health > 0) {
+			healthText.text = this.health.ToString();
 		}
 	}
 
+	// run by both the clients and servers..
 	public IEnumerator delayRespawn() {
 		messageText.gameObject.SetActive(true);
 		yield return new WaitForSeconds(3.0f);
 		messageText.gameObject.SetActive(false);
 		this.health = 100;
-		updateHealth (this.health);
+//		updateHealth (this.health);
 		deadFlag = false;
 		Respawn();
 	}
@@ -233,32 +232,38 @@ public class SpaceShipControl : MonoBehaviour {
 	public void fireGun(){
 		Debug.Log("hey the gun fired");
 		Debug.Log(Input.mousePosition);
-		if( networkView.isMine){
-			networkView.RPC("fireGun",RPCMode.Others);
-		}
-		
+
 		Vector3 target = crosshair.transform.position - aimingCameraTransform.position;
 		target.Normalize ();
 		Vector3 pos = crosshair.transform.position + target * 10;
 		target = target * 300;
 		target = target + rigidbody.velocity;
-		
-		//		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
+
+		if( networkView.isMine){
+			networkView.RPC("fireGunOthers",RPCMode.All,pos,target);
+		}
+	}
+	[RPC]
+	private void fireGunOthers(Vector3 pos,Vector3 target){
 		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 		BulletController bulletController = bullet.GetComponent<BulletController> ();
 		bulletController.Init(0.75f, target, this.collider);
 	}
+
 	
 	[RPC]
 	public void fireMissle(NetworkViewID ownerId,NetworkViewID targetViewId){
-		if (networkView.isMine){
-			networkView.RPC("fireMissle",RPCMode.Others,ownerId,targetViewId);
-		}
-		
-		GameObject targetGameObject = NetworkManager.Find(targetViewId);
-		targetGameObject = null;
-		GameObject ownerObject = NetworkManager.Find(ownerId);
 		Vector3 pos = missileHatch.position;
+		if (networkView.isMine){
+			networkView.RPC("fireMissleOthers",RPCMode.All,ownerId,targetViewId,pos,this.rigidbody.velocity);
+		}
+	}
+	[RPC]
+	private void fireMissleOthers(NetworkViewID ownerID, NetworkViewID targetViewID, Vector3 pos, Vector3 vel){
+		GameObject targetGameObject = NetworkManager.Find(targetViewID);
+		targetGameObject = null;
+
+		GameObject ownerObject = NetworkManager.Find(ownerID);
 		GameObject missle1 = (Network.Instantiate(misslePrefab,pos,Quaternion.identity,0) as GameObject);
 		Network.Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity,0);
 		
@@ -266,17 +271,21 @@ public class SpaceShipControl : MonoBehaviour {
 		
 		// set the target and stuff
 		MissleController m1 = missle1.GetComponent<MissleController>();
-		m1.Init(ownerObject,targetGameObject,0.75f,0.5f,this.rigidbody.velocity);
+		m1.Init(ownerObject,targetGameObject,0.75f,0.5f,vel);
 	}
+	
+//	[RPC]
+//	public void respawn(){
+//		if( networkView.isMine) {
+//			networkView.RPC("respawn", RPCMode.Others);
+//		}
+//		Respawn();
+//	}
 
-	[RPC]
-	public void respawn(){
-		if( networkView.isMine) {
-			networkView.RPC("respawn", RPCMode.Others);
-		}
-		Respawn();
+	public void Respawn() {
+		Respawn (null);
 	}
-
+	
 	public void Respawn(GameObject box){
 		if (box != null || playerSpawnPoint != null) {
 			Debug.Log ("Position within launchbox");
@@ -304,6 +313,10 @@ public class SpaceShipControl : MonoBehaviour {
 
 	public void onHit(int damage)
 	{
-		this.updateHealth (health - damage);
+		if(Network.isServer){
+			// can only update the health if you are the server...
+//			this.updateHealth (health - damage);
+			networkView.RPC("updateHealth",RPCMode.All,health-damage);
+		}
 	}
 }

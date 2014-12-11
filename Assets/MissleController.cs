@@ -78,7 +78,7 @@ public class MissleController : MonoBehaviour {
 			GameObject go = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
 			Destroy(go, 2.0f);
 		}
-		NetworkManager.Destroy(gameObject);
+		Destroy(gameObject);
 	}
 	
 	IEnumerator AutoExplode(float autoDestroyTime){
