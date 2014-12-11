@@ -22,7 +22,7 @@ public class NetworkManager : MonoBehaviour {
 	
 	void Start(){
 		if( autoConnect && Network.isServer == false){
-			Play(_startDefaultGame);
+//			Play(_startDefaultGame);
 		}
 	}
 	private void _startDefaultGame(){

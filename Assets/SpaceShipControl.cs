@@ -50,12 +50,16 @@ public class SpaceShipControl : MonoBehaviour {
 	public int health;
 	public bool deadFlag = false;
 
+
+	public static SpaceShipControl instance;
 	void Awake(){
 		if (networkView.isMine == false)
 		{
 			defaultCamera.enabled = false; // disable the camera of the non-owned Player;
 			defaultCamera.gameObject.GetComponent<MouseLook>().enabled = false;
 			defaultCamera.GetComponent<AudioListener>().enabled = false;// Disables AudioListener of non-owned Player - prevents multiple AudioListeners from being present in scene.
+		}else{
+			instance = this;
 		}
 	}
 	
@@ -148,7 +152,7 @@ public class SpaceShipControl : MonoBehaviour {
 		// Engine Sound
 		float speed = rigidbody.velocity.magnitude;
 		audio.pitch = speed / 200;
-		Debug.Log (audio.pitch);
+//		Debug.Log (audio.pitch);
 
 	}
 
@@ -165,9 +169,9 @@ public class SpaceShipControl : MonoBehaviour {
 				this.health = 0;
 				deadFlag = true;
 				Debug.Log("You died!");
-				setCockpitMessage("YOU DIED.");
+//				setCockpitMessage("YOU DIED.");
 				//this is backwards
-				DemoSceneManager.instance.incrementScore(Network.player);
+//				DemoSceneManager.instance.incrementScore(Network.player);
 				StartCoroutine(delayRespawn());
 			}
 			healthText.text = this.health.ToString();

@@ -74,9 +74,9 @@ public class LobbySceneManager : MonoBehaviour {
 //			DemoSceneManager.instance.StartGame(Vector3.zero);
 //		}
 //		// turn off all the stuff...
-//		this.gameObject.SetActive(false);
-//		PlayZoneTrigger.instance.gameObject.SetActive(false);
+		this.enabled = false;
+		PlayZoneTrigger.instance.enabled = false;
 
-		Application.LoadLevel(gameSceneName);
+//		Application.LoadLevel(gameSceneName);
 	}
 }
