@@ -171,18 +171,20 @@ public class SpaceShipControl : MonoBehaviour {
 	
 	[RPC]
 	public void updateHealth(int newHealth){
+		Debug.Log ("Updating health: " + newHealth);
 		if( networkView.isMine){
+			Debug.Log("My health");
 			this.health = newHealth;
-			if( this.health < 0){
+			healthText.text = this.health.ToString();
+			if( this.health <= 0){
 				this.health = 0;
 				deadFlag = true;
 				Debug.Log("You died!");
-//				setCockpitMessage("YOU DIED.");
-				//this is backwards
+				setCockpitMessage("YOU DIED.");
 //				DemoSceneManager.instance.incrementScore(Network.player);
 				StartCoroutine(delayRespawn());
 			}
-			healthText.text = this.health.ToString();
+
 			networkView.RPC("updateHealth",RPCMode.Others, newHealth);
 		}
 	}

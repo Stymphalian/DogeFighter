@@ -177,7 +177,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11481272, guid: 1f42265c513f50848817b7f9076ab44e, type: 2}
       propertyPath: alwaysNewServer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f42265c513f50848817b7f9076ab44e, type: 2}
@@ -1521,7 +1521,6 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:
@@ -1803,7 +1802,7 @@ MonoBehaviour:
   serverCreateAttempts: 10
   clientJoinAttempts: 10
   autoConnect: 0
-  alwaysNewServer: 1
+  alwaysNewServer: 0
   defaultSceneName: Demo
 --- !u!4 &1433595851
 Transform:

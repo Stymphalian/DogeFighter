@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 427466}
+  - 148: {fileID: 14898396}
   m_Layer: 0
   m_Name: LaunchBox
   m_TagString: Untagged
@@ -487,6 +488,18 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!148 &14898396
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127466}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 427466}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!224 &22463838
 RectTransform:
   m_ObjectHideFlags: 1

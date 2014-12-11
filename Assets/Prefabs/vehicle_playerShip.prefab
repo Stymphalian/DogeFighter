@@ -629,8 +629,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129108}
-  m_LocalRotation: {x: .0721360296, y: -.122163042, z: -.00992900413, w: .989835382}
-  m_LocalPosition: {x: -.00639934512, y: -.000949962472, z: .0293894187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.00218000007, y: .00171999994, z: .0241199993}
   m_LocalScale: {x: .000521268288, y: .000521268521, z: .000521268463}
   m_Children: []
   m_Father: {fileID: 429154}
@@ -1582,7 +1582,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129108}
-  m_Text: 'Health: 100'
+  m_Text: DAMAGE
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
