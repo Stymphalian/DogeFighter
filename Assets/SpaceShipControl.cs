@@ -124,9 +124,9 @@ public class SpaceShipControl : MonoBehaviour {
 				DemoSceneManager.instance.StartGame(Vector3.zero);
 			}
 		}
-		if (Input.GetKeyDown ("1") && currentMissileCount > 0) {
+		if (Input.GetMouseButtonDown(1) && currentMissileCount > 0) {
 			fireMissle (networkView.viewID, networkView.viewID);
-		} else if (Input.GetKey ("3")) {
+		} else if (Input.GetMouseButton(0)) {
 //			health -= 5;
 //			updateHealth(health);
 //			Debug.Log("damaging self");
