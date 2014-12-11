@@ -10,7 +10,6 @@ public class Notification : MonoBehaviour {
 		Notification.instance = this;
 		text = this.transform.Find("Text").GetComponent<UnityEngine.UI.Text>();
 		text.text = "";
-		this.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(closeHandler);
 		this.gameObject.SetActive(false);
 	}
 	
@@ -18,14 +17,13 @@ public class Notification : MonoBehaviour {
 		this.gameObject.SetActive(true);
 		StopAllCoroutines();
 		text.text = msg;
-		if( time != -1){
+		if( time < 0){
+			StartCoroutine(timeTick(1.0f));
+		}else{
 			StartCoroutine(timeTick(time));
 		}
 	}
 
-	private void closeHandler(){
-		this.gameObject.SetActive(false);
-	}
 	private IEnumerator timeTick(float time){
 		yield return new WaitForSeconds(time);
 		this.gameObject.SetActive(false);
