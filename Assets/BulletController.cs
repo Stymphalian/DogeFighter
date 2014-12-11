@@ -21,12 +21,15 @@ public class BulletController : MonoBehaviour {
 		//		Debug.Log(rigidbody.velocity);
 	}
 
-	void OnTriggerEnter(Collider other){
+	void OnCollisionEnter(Collision collision){
 		Debug.Log("trigger happened");
-		ExplodeSelf();
-		
-		// do something to the other object
-		// take away health, etc
+
+		var player = collision.gameObject.GetComponent<SpaceShipControl>();
+		if (player) {
+			player.onHit(this.bulletDamage);
+		}
+
+		ExplodeSelf();	// test if this is needed
 	}
 
 	void ExplodeSelf(){

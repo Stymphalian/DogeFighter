@@ -8,6 +8,7 @@ public class MissleController : MonoBehaviour {
 	public GameObject target = null;
 	public GameObject owner = null;
 	public float autoDestroyTime = 20.0f;
+	public int missileDamage = 100;
 	
 	public ParticleSystem tailTrail;
 
@@ -58,12 +59,15 @@ public class MissleController : MonoBehaviour {
 //		Debug.Log(rigidbody.velocity);
 	}
 	
-	void OnTriggerEnter(Collider other){
+	void OnCollisionEnter(Collision collision){
 		Debug.Log("trigger happened");
-		ExplodeSelf();
+
+		var player = collision.gameObject.GetComponent<SpaceShipControl>();
+		if (player) {
+			player.onHit(this.missileDamage);
+		}
 		
-		// do something to the other object
-		// take away health, etc
+		ExplodeSelf();
 	}
 	
 	void ExplodeSelf(){

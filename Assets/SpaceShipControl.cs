@@ -251,7 +251,13 @@ public class SpaceShipControl : MonoBehaviour {
 			SkyboxFollow.instance.following = this.gameObject;
 		}
 	}
+
 	public void setCockpitMessage(string text) {
 		messageText.text = text;
+	}
+
+	public void onHit(int damage)
+	{
+		this.updateHealth (health - damage);
 	}
 }
