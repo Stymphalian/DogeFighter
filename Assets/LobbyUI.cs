@@ -59,7 +59,7 @@ public class LobbyUI : MonoBehaviour {
 		this.gameObject.SetActive(false);
 
 		if(Network.isServer){
-			DemoSceneManager.instance.StartGame();
+			DemoSceneManager.instance.StartGame(Vector3.zero);
 //			GameStateManager.instance.StartGame();
 			// here we should start the game..
 		}
