@@ -62,6 +62,7 @@ public class MissleController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider){
+		if( Network.isServer == false){return;}
 		Debug.Log("MissleController OnTriggerEnter");
 		
 		var player = collider.gameObject.GetComponent<SpaceShipControl>();

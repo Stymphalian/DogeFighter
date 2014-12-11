@@ -22,6 +22,7 @@ public class BulletController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collision){
+		if( Network.isServer == false){return;}
 		Debug.Log("BulletContorller trigger happened");
 		
 		var player = collision.gameObject.GetComponent<SpaceShipControl>();
