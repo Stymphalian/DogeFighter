@@ -87,9 +87,10 @@ public class DemoSceneManager : MonoBehaviour {
 			if (playerLives [player] <= 0) {
 				Debug.Log ("END GAME");
 			}
-		} else {
-			networkView.RPC("reduceLives",RPCMode.Server, player);
 		}
+//		else {
+//			networkView.RPC("reduceLives",RPCMode.Server, player);
+//		}
 	}
 
 }

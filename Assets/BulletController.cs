@@ -47,7 +47,7 @@ public class BulletController : MonoBehaviour {
 		if( explosion != null){
 			Instantiate(explosion, transform.position, Quaternion.identity);
 		}
-		NetworkManager.Destroy(gameObject);
+		Destroy(gameObject);
 	}
 	
 	IEnumerator AutoExplode(float autoDestroyTime){
