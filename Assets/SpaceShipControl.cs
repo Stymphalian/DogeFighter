@@ -62,6 +62,7 @@ public class SpaceShipControl : MonoBehaviour {
 		timeElapsedSinceLastMissileRegen = 0.0f;
 		timeElapsedSinceLastBulletFire = 0.0f;
 		bulletHotGauge = 0.0f;
+		health = 100;
 
 		if (useOVR) {
 			Destroy(defaultCamera.gameObject);
@@ -85,6 +86,7 @@ public class SpaceShipControl : MonoBehaviour {
 		} else {
 			tailTrail.emissionRate = 0;
 		}
+		//for testing purposes only!
 
 		rigidbody.AddRelativeTorque(pitch*turnspeed, yaw*turnspeed, roll*turnspeed);
 		rigidbody.AddForce(gas * force * this.transform.forward*10);
@@ -99,16 +101,17 @@ public class SpaceShipControl : MonoBehaviour {
 
 		timeElapsedSinceLastBulletFire += Time.deltaTime;
 
-		if (Input.GetKeyDown("1") && currentMissileCount > 0) {
-			fireMissle(networkView.viewID,networkView.viewID);
-		} else if (Input.GetKey("3")) {
-			if (timeElapsedSinceLastBulletFire >= bulletFireInterval && bulletHotGauge < BULLET_MAX_HOT_GAUGE)
-			{
+		if (Input.GetKeyDown ("1") && currentMissileCount > 0) {
+			fireMissle (networkView.viewID, networkView.viewID);
+		} else if (Input.GetKey ("3")) {
+			health -= 20;
+			updateHealth(health);
+			Debug.Log("damaging self");
+			if (timeElapsedSinceLastBulletFire >= bulletFireInterval && bulletHotGauge < BULLET_MAX_HOT_GAUGE) {
 				timeElapsedSinceLastBulletFire = 0;
-				fireGun();
+				fireGun ();
 				bulletHotGauge += bulletHotGaugeIncreaseDeltaPerBullet;
-				if (bulletHotGauge >= BULLET_MAX_HOT_GAUGE)
-				{
+				if (bulletHotGauge >= BULLET_MAX_HOT_GAUGE) {
 					bulletHotGauge = BULLET_MAX_HOT_GAUGE;
 				}
 			}
@@ -152,6 +155,11 @@ public class SpaceShipControl : MonoBehaviour {
 		if( this.health < 0){
 			this.health = 0;
 			deadFlag = true;
+			Debug.Log("You died!");
+			//this is backwards
+			DemoSceneManager.instance.incrementScore(Network.player);
+			this.health = 100;
+			deadFlag = false;
 		}
 		healthText.text = this.health.ToString();
 	}
