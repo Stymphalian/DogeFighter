@@ -7,6 +7,7 @@ public class DemoSceneManager : MonoBehaviour {
 
 	public GameObject playerPrefab;
 	public GameObject launchBox;
+	public GameObject spaceStation;
 	public GameObject[] planets;
 	public bool[] usedPlanets = new bool[4] {false,false,false,false};
 	public bool inGameFlag = false;
@@ -30,6 +31,7 @@ public class DemoSceneManager : MonoBehaviour {
 	public EventSubscriber ev = new EventSubscriber();
 	[RPC]
 	public void StartGame(Vector3 postition){
+		spaceStation.SetActive(false);
 		ev.Publish(null);
 		inGameFlag = true;
 

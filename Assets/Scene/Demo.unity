@@ -383,7 +383,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11481272, guid: 1f42265c513f50848817b7f9076ab44e, type: 2}
       propertyPath: disableClientConnections
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f42265c513f50848817b7f9076ab44e, type: 2}
@@ -1937,12 +1937,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 129118, guid: 244c6ad319b65d647afc34815d56bef5, type: 2}
   launchBox: {fileID: 127466, guid: e35f158baebcf458ab513ece067fce5e, type: 2}
+  spaceStation: {fileID: 1278105354}
   planets:
   - {fileID: 1559625751}
   - {fileID: 1646994550}
   - {fileID: 0}
   - {fileID: 0}
   usedPlanets: 00000000
+  inGameFlag: 0
 --- !u!4 &1384163481
 Transform:
   m_ObjectHideFlags: 0
@@ -2143,7 +2145,7 @@ MonoBehaviour:
   serverCreateAttempts: 10
   clientJoinAttempts: 10
   alwaysNewServer: 1
-  disableClientConnections: 1
+  disableClientConnections: 0
 --- !u!4 &1433595851
 Transform:
   m_ObjectHideFlags: 0
