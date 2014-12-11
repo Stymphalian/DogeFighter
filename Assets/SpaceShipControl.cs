@@ -250,6 +250,9 @@ public class SpaceShipControl : MonoBehaviour {
 		}
 		messageText.gameObject.SetActive(false);
 		this.health = 100;
+		this.currentMissileCount = initialMissileCount;
+		bulletHotGauge = 0;
+
 		if(Network.isServer){
 			updateHealth (this.health);
 		}
