@@ -9,6 +9,7 @@ public class DemoSceneManager : MonoBehaviour {
 	public GameObject launchBox;
 	public GameObject[] planets;
 	public bool[] usedPlanets = new bool[4] {false,false,false,false};
+	public bool inGameFlag = false;
 	public Dictionary<NetworkPlayer, int> playerLives = new Dictionary<NetworkPlayer, int>();
 
 
@@ -30,6 +31,8 @@ public class DemoSceneManager : MonoBehaviour {
 	[RPC]
 	public void StartGame(Vector3 postition){
 		ev.Publish(null);
+		inGameFlag = true;
+
 		if(Network.isServer){
 			// prevent anyone from connection after the game starts
 			Network.maxConnections = 0;
@@ -81,7 +84,8 @@ public class DemoSceneManager : MonoBehaviour {
 
 	[RPC]
 	public void reduceLives(NetworkPlayer player) {
-		if (Network.isServer) {
+		if (Network.isServer && inGameFlag == true) {
+
 			playerLives [player]--;
 			Debug.Log("Remaining lives:" + playerLives [player]);
 			if (playerLives [player] <= 0) {
