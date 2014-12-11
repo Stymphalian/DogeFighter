@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class CrosshairScript : MonoBehaviour {
-	public Camera CameraFacing;
+	public GameObject CameraFacing;
 	private Vector3 originalScale;
 	
 	// Use this for initialization
@@ -18,7 +18,7 @@ public class CrosshairScript : MonoBehaviour {
 		if (Physics.Raycast (ray, out hit)) {
 			distance = hit.distance;
 		} else {
-			distance = CameraFacing.farClipPlane * 0.95f;
+			distance = 1000f;
 		}
 		//transform.position = CameraFacing.transform.position + CameraFacing.transform.rotation * Vector3.forward * distance;
 		transform.position = CameraFacing.transform.position + CameraFacing.transform.rotation * Vector3.forward * 0.5f;
