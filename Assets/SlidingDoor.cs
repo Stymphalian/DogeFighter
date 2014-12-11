@@ -25,6 +25,10 @@ public class SlidingDoor : MonoBehaviour {
 			StartCoroutine (moveDoor());
 	}
 
+	void OnTriggerExit(Collider other) {
+		opened = false;
+	}
+
 	IEnumerator moveDoor(){
 		opened = true;
 		float time = 0;

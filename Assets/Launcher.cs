@@ -22,6 +22,10 @@ public class Launcher : MonoBehaviour {
 	void Update () {
 	}
 
+	void OnTriggerEnter(Collider other) {
+		StartCoroutine (delayLaunch(1f));
+	}
+
 	void OnTriggerStay(Collider other) {
 		Debug.Log ("INSIDE THE BOX");
 		if (launch) {

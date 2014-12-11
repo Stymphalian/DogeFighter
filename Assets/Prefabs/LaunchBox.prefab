@@ -9,6 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 427466}
   - 148: {fileID: 14898396}
+  - 114: {fileID: 11499784}
+  - 65: {fileID: 6534066}
   m_Layer: 0
   m_Name: LaunchBox
   m_TagString: Untagged
@@ -500,6 +502,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 40, z: 1}
   m_Center: {x: 0, y: 10, z: 0}
+--- !u!65 &6534066
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 60, y: 20, z: 20}
+  m_Center: {x: 0, y: 10, z: 0}
 --- !u!65 &6563838
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -568,6 +582,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03142c4d56839470589a62f2ad3570ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11499784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c777e73e0ec4cc1adf118a4d2c5b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!148 &14898396
