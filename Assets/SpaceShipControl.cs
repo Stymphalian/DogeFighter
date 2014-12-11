@@ -294,7 +294,7 @@ public class SpaceShipControl : MonoBehaviour {
 		}
 		GameObject ownerObject = NetworkManager.Find(ownerID);
 		GameObject missle1 = (Instantiate(misslePrefab,pos,Quaternion.identity) as GameObject);
-		Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity);
+		Instantiate(fireMissileExplosion, missle1.transform.position, this.transform.rotation);
 		
 		currentMissileCount--;
 		
