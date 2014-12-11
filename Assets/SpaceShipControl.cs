@@ -40,8 +40,9 @@ public class SpaceShipControl : MonoBehaviour {
 	public GameObject OVRRig;
 	public GameObject fireMissileExplosion;
 	public Transform missileHatch;
-	public Transform aimingObject;
-	
+	public Transform aimingCameraTransform;
+	public GameObject crosshair;
+
 	private float initialEmissionRate;
 	private int currentMissileCount;
 	private float timeElapsedSinceLastMissileRegen;
@@ -83,6 +84,8 @@ public class SpaceShipControl : MonoBehaviour {
 			Destroy(defaultCamera.gameObject);
 		} else {
 			Destroy(OVRRig);
+			crosshair = defaultCamera.gameObject.transform.Find("Crosshair").gameObject;
+			aimingCameraTransform = defaultCamera.transform;
 		}
 
 		bulletHotGaugeProgressBar.renderer.material.color = new Color (0.80f, 0.30f, 0.20f);
@@ -207,13 +210,14 @@ public class SpaceShipControl : MonoBehaviour {
 			networkView.RPC("fireGun",RPCMode.Others);
 		}
 
-		Ray ray = defaultCamera.ScreenPointToRay(Input.mousePosition);
-		Vector3 target = ray.direction * rigidbody.velocity.magnitude;
+		Vector3 target = crosshair.transform.position - aimingCameraTransform.position;
+		target.Normalize ();
+		Vector3 pos = crosshair.transform.position + target * 10;
+		target = target * 300;
+		target = target + rigidbody.velocity;
 
-		Vector3 pos = aimingObject.position;
 		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 		BulletController bulletController = bullet.GetComponent<BulletController> ();
-		//bulletController.Init(0.75f, this.rigidbody.velocity);
 		bulletController.Init(0.75f, target, this.collider);
 	}
 
