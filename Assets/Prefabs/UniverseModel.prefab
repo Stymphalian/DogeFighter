@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.00365999993, z: .0260099992}
+  m_LocalPosition: {x: -1075.48804, y: -1713.46606, z: -48.0577507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450762}
@@ -258,14 +258,14 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
-    startWidth: .00999999978
-    endWidth: .00999999978
+    startWidth: .200000003
+    endWidth: .0500000007
     m_StartColor:
       serializedVersion: 2
-      rgba: 4278255369
+      rgba: 4294967295
     m_EndColor:
       serializedVersion: 2
-      rgba: 4278386432
+      rgba: 4294967295
   m_UseWorldSpace: 1
 --- !u!1001 &100100000
 Prefab:
