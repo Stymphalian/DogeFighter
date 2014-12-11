@@ -161,7 +161,7 @@ GameObject:
   - 23: {fileID: 2300004}
   - 102: {fileID: 10200000}
   m_Layer: 0
-  m_Name: Health
+  m_Name: MessageLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -447,6 +447,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &161656
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461656}
+  - 23: {fileID: 2361656}
+  - 102: {fileID: 10261656}
+  m_Layer: 0
+  m_Name: Health
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &174514
 GameObject:
   m_ObjectHideFlags: 1
@@ -654,7 +671,7 @@ Transform:
   - {fileID: 400002}
   - {fileID: 400000}
   m_Father: {fileID: 400044}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!4 &400028
 Transform:
   m_ObjectHideFlags: 1
@@ -669,19 +686,19 @@ Transform:
   - {fileID: 400010}
   - {fileID: 400008}
   m_Father: {fileID: 400044}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!4 &400030
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
-  m_LocalRotation: {x: .072136417, y: -.122162536, z: -.00992942229, w: .989835382}
-  m_LocalPosition: {x: -.00639999984, y: -.000950000016, z: .0293899998}
-  m_LocalScale: {x: .000521265611, y: .000521265494, z: .000521265494}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.0028299999, y: .00185999996, z: .0293899998}
+  m_LocalScale: {x: .00100000005, y: .00100000005, z: .00100000005}
   m_Children: []
   m_Father: {fileID: 400044}
-  m_RootOrder: 5
+  m_RootOrder: 0
 --- !u!4 &400032
 Transform:
   m_ObjectHideFlags: 1
@@ -693,7 +710,7 @@ Transform:
   m_LocalScale: {x: .000521268346, y: .000521268463, z: .000521268521}
   m_Children: []
   m_Father: {fileID: 400044}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &400034
 Transform:
   m_ObjectHideFlags: 1
@@ -705,7 +722,7 @@ Transform:
   m_LocalScale: {x: .000521265552, y: .000521265494, z: .000521265494}
   m_Children: []
   m_Father: {fileID: 400044}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &400036
 Transform:
   m_ObjectHideFlags: 1
@@ -721,7 +738,7 @@ Transform:
   - {fileID: 400016}
   - {fileID: 400014}
   m_Father: {fileID: 400044}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &400038
 Transform:
   m_ObjectHideFlags: 1
@@ -735,7 +752,7 @@ Transform:
   - {fileID: 400024}
   - {fileID: 400022}
   m_Father: {fileID: 400044}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &400040
 Transform:
   m_ObjectHideFlags: 1
@@ -747,7 +764,7 @@ Transform:
   m_LocalScale: {x: .173317507, y: .173317686, z: .173317686}
   m_Children: []
   m_Father: {fileID: 400044}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &400042
 Transform:
   m_ObjectHideFlags: 1
@@ -768,14 +785,15 @@ Transform:
   m_GameObject: {fileID: 100044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -.0199237801, z: -.11821571}
-  m_LocalScale: {x: 5.76975775, y: 5.76975155, z: 5.76975155}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
+  - {fileID: 400030}
   - {fileID: 400040}
   - {fileID: 400038}
   - {fileID: 400036}
   - {fileID: 400034}
   - {fileID: 400032}
-  - {fileID: 400030}
+  - {fileID: 461656}
   - {fileID: 474514}
   - {fileID: 400028}
   - {fileID: 400026}
@@ -834,6 +852,18 @@ Transform:
   - {fileID: 400044}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &461656
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161656}
+  m_LocalRotation: {x: .072136417, y: -.122162536, z: -.00992942229, w: .989835382}
+  m_LocalPosition: {x: -.00639999984, y: -.000950000016, z: .0293899998}
+  m_LocalScale: {x: .000521265611, y: .000521265494, z: .000521265494}
+  m_Children: []
+  m_Father: {fileID: 400044}
+  m_RootOrder: 6
 --- !u!4 &474514
 Transform:
   m_ObjectHideFlags: 1
@@ -846,7 +876,7 @@ Transform:
   m_Children:
   - {fileID: 474516}
   m_Father: {fileID: 400044}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &474516
 Transform:
   m_ObjectHideFlags: 1
@@ -1109,6 +1139,26 @@ Renderer:
   m_Materials:
   - {fileID: 2100000, guid: 8940b037a9b441c4cbd3d2b446838424, type: 2}
   - {fileID: 2100000, guid: f36c72c738c55f741afcd674a0b1245f, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!23 &2361656
+Renderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161656}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 48a0c388fb57946bba4f2898c0d49a3f, type: 3}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1414,7 +1464,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
-  m_Text: 'Health: 100'
+  m_Text: MESSAGE
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1427,7 +1477,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 48a0c388fb57946bba4f2898c0d49a3f, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190335
 --- !u!102 &10200002
 TextMesh:
   serializedVersion: 3
@@ -1457,6 +1507,27 @@ TextMesh:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
   m_Text: 'Speed: 100km/s'
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 12
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 48a0c388fb57946bba4f2898c0d49a3f, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!102 &10261656
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161656}
+  m_Text: 'Health: 100'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1578,7 +1649,8 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 0}
   velocityText: {fileID: 10200004}
   missileCount: {fileID: 10200002}
-  healthText: {fileID: 10200000}
+  healthText: {fileID: 10261656}
+  messageText: {fileID: 10200000}
   bulletPrefab: {fileID: 190144, guid: 24edc68cdb8ec4f2f9dfda1b31bde9be, type: 2}
   bulletBurstPrefab: {fileID: 100012, guid: 5f8c749a121cea74f86c039e7f618241, type: 2}
   bulletHotGaugeProgressBar: {fileID: 174516}

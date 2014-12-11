@@ -21,6 +21,8 @@ public class SpaceShipControl : MonoBehaviour {
 	public TextMesh velocityText;
 	public TextMesh missileCount;
 	public TextMesh healthText;
+	public TextMesh messageText;
+
 
 	// Bullet
 	public GameObject bulletPrefab;
@@ -66,6 +68,8 @@ public class SpaceShipControl : MonoBehaviour {
 		timeElapsedSinceLastBulletFire = 0.0f;
 		bulletHotGauge = 0.0f;
 		health = 100;
+		messageText.gameObject.SetActive(false);
+
 
 		if (useOVR) {
 			Destroy(defaultCamera.gameObject);
@@ -108,9 +112,9 @@ public class SpaceShipControl : MonoBehaviour {
 		if (Input.GetKeyDown ("1") && currentMissileCount > 0) {
 			fireMissle (networkView.viewID, networkView.viewID);
 		} else if (Input.GetKey ("3")) {
-			health -= 20;
-			updateHealth(health);
-			Debug.Log("damaging self");
+//			health -= 5;
+//			updateHealth(health);
+//			Debug.Log("damaging self");
 			if (timeElapsedSinceLastBulletFire >= bulletFireInterval && bulletHotGauge < BULLET_MAX_HOT_GAUGE) {
 				timeElapsedSinceLastBulletFire = 0;
 				fireGun ();
@@ -155,20 +159,29 @@ public class SpaceShipControl : MonoBehaviour {
 	[RPC]
 	public void updateHealth(int newHealth){
 		if( networkView.isMine){
+			this.health = newHealth;
+			if( this.health < 0){
+				this.health = 0;
+				deadFlag = true;
+				Debug.Log("You died!");
+				setCockpitMessage("YOU DIED.");
+				//this is backwards
+				DemoSceneManager.instance.incrementScore(Network.player);
+				StartCoroutine(delayRespawn());
+			}
+			healthText.text = this.health.ToString();
 			networkView.RPC("updateHealth",RPCMode.Others, newHealth);
 		}
+	}
 
-		this.health = newHealth;
-		if( this.health < 0){
-			this.health = 0;
-			deadFlag = true;
-			Debug.Log("You died!");
-			//this is backwards
-			DemoSceneManager.instance.incrementScore(Network.player);
-			this.health = 100;
-			deadFlag = false;
-		}
-		healthText.text = this.health.ToString();
+	public IEnumerator delayRespawn() {
+		messageText.gameObject.SetActive(true);
+		yield return new WaitForSeconds(3.0f);
+		messageText.gameObject.SetActive(false);
+		this.health = 100;
+		updateHealth (this.health);
+		deadFlag = false;
+		Respawn();
 	}
 
 	[RPC]
@@ -236,5 +249,8 @@ public class SpaceShipControl : MonoBehaviour {
 		if( SkyboxFollow.instance != null){
 			SkyboxFollow.instance.following = this.gameObject;
 		}
+	}
+	public void setCockpitMessage(string text) {
+		messageText.text = text;
 	}
 }
