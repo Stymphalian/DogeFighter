@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Missle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +101,7 @@ MonoBehaviour:
   homingSensitivity: .100000001
   speed: 100
   target: {fileID: 0}
+  owner: {fileID: 0}
   autoDestroyTime: 5
   tailTrail: {fileID: 0}
 --- !u!1001 &100100000

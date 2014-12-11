@@ -38,6 +38,7 @@ public class SpaceShipControl : MonoBehaviour {
 	public Object OVRRig;
 	public GameObject fireMissileExplosion;
 	public Transform missileHatch;
+	public Transform aimingObject;
 	
 	private float initialEmissionRate;
 	private int currentMissileCount;
@@ -165,23 +166,19 @@ public class SpaceShipControl : MonoBehaviour {
 	[RPC]
 	public void fireGun(){
 		Debug.Log("hey the gun fired");
+		Debug.Log(Input.mousePosition);
 		if( networkView.isMine){
 			networkView.RPC("fireGun",RPCMode.Others);
 		}
 
 		Ray ray = defaultCamera.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit = new RaycastHit();
-		Vector3 target;
-		if (Physics.Raycast (ray, out hit, 10000f))
-			target = hit.point;
-		else
-			target = ray.direction * 10000f;
+		Vector3 target = ray.direction * rigidbody.velocity.magnitude;
 
-		Vector3 pos = bulletHatch.position;
+		Vector3 pos = aimingObject.position;
 		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 		BulletController bulletController = bullet.GetComponent<BulletController> ();
 		//bulletController.Init(0.75f, this.rigidbody.velocity);
-		bulletController.Init(0.75f, target);
+		bulletController.Init(0.75f, target, this.collider);
 	}
 
 	[RPC]
@@ -216,10 +213,11 @@ public class SpaceShipControl : MonoBehaviour {
 		if (box != null || playerSpawnPoint != null) {
 			Debug.Log ("Position within launchbox");
 			if (playerSpawnPoint == null) {
+				Debug.Log("HERE");
+				Debug.Log(box.transform.position);
 				playerSpawnPoint = box;
-				playerSpawnPoint.transform.position = Vector3.zero;
 			}
-			this.transform.position = new Vector3 (playerSpawnPoint.transform.position.x - 39,playerSpawnPoint.transform.position.y + 15, 0);
+			this.transform.position = new Vector3 (playerSpawnPoint.transform.position.x - 39,playerSpawnPoint.transform.position.y + 15, playerSpawnPoint.transform.position.z);
 			this.transform.rotation = Quaternion.AngleAxis (90, Vector3.up);
 		} else {
 			Debug.Log("Position without launchbox");

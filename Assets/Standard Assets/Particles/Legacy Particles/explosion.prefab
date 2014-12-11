@@ -11,7 +11,7 @@ GameObject:
   - 15: {fileID: 1500002}
   - 12: {fileID: 1200002}
   - 26: {fileID: 2600002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: large flames
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   - 82: {fileID: 8200000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
