@@ -23,14 +23,10 @@ public class LobbySceneManager : MonoBehaviour {
 	
 	void OnConnectedCallback(){
 		Network.Instantiate(playerShipPrefab,spawnPoint.transform.position,Quaternion.identity,0);
-
 		if(Network.isServer){
 			Debug.LogError("I am the server");
-			// do nothign, we are waiting for other players.
-			// wiating for players...
 		}else if(Network.isClient){
 			Debug.LogError("I am the client");
-			// create a ship for the player to fly in for now...
 		}
 	}
 		
@@ -69,12 +65,15 @@ public class LobbySceneManager : MonoBehaviour {
 			Notification.instance.Message(seconds.ToString(),1.0f);
 		}
 
+
+		// turn off all the stuff...
 		this.enabled = false;
 		PlayZoneTrigger.instance.enabled = false;
+
 		if( Network.isServer){
 			DemoSceneManager.instance.StartGame(Vector3.zero);
 		}
-//		// turn off all the stuff...
+
 
 //		Application.LoadLevel(gameSceneName);
 	}

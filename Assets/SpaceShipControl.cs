@@ -218,6 +218,7 @@ public class SpaceShipControl : MonoBehaviour {
 		target = target * 300;
 		target = target + rigidbody.velocity;
 
+//		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 		BulletController bulletController = bullet.GetComponent<BulletController> ();
 		bulletController.Init(0.75f, target, this.collider);
