@@ -25,17 +25,20 @@ public class SpaceShipControl : MonoBehaviour {
 	// Bullet
 	public GameObject bulletPrefab;
 	public GameObject bulletBurstPrefab;	// temporarily using same prefab as missile explosion. Get new explosion prefab for bullet
+	public GameObject bulletHotGaugeProgressBar;
 	public Transform bulletHatch;
 	public float bulletFireInterval;
 	public float bulletHotGaugeIncreaseDeltaPerBullet;
 	public float bulletHotGaugeDecreaseDeltaPerSecond;
 	private float timeElapsedSinceLastBulletFire;
 	private float bulletHotGauge;
+	private float initialXPos;
 
 	public Camera defaultCamera;
 	public Object OVRRig;
 	public GameObject fireMissileExplosion;
 	public Transform missileHatch;
+	public Transform aimingObject;
 	
 	private float initialEmissionRate;
 	private int currentMissileCount;
@@ -70,6 +73,7 @@ public class SpaceShipControl : MonoBehaviour {
 			Destroy(OVRRig);
 		}
 
+		bulletHotGaugeProgressBar.renderer.material.color = new Color (0.80f, 0.30f, 0.20f);
 	}
 
 	void FixedUpdate () {
@@ -126,6 +130,9 @@ public class SpaceShipControl : MonoBehaviour {
 			}
 		}
 
+		float currentScaleX = bulletHotGauge / BULLET_MAX_HOT_GAUGE;
+		bulletHotGaugeProgressBar.transform.localScale = new Vector3 (currentScaleX, 1.0f, 1.0f);
+
 		timeElapsedSinceLastMissileRegen += Time.deltaTime;
 		if (timeElapsedSinceLastMissileRegen >= missileRegenInterval) {
 			timeElapsedSinceLastMissileRegen = 0;
@@ -167,23 +174,19 @@ public class SpaceShipControl : MonoBehaviour {
 	[RPC]
 	public void fireGun(){
 		Debug.Log("hey the gun fired");
+		Debug.Log(Input.mousePosition);
 		if( networkView.isMine){
 			networkView.RPC("fireGun",RPCMode.Others);
 		}
 
 		Ray ray = defaultCamera.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit = new RaycastHit();
-		Vector3 target;
-		if (Physics.Raycast (ray, out hit, 10000f))
-			target = hit.point;
-		else
-			target = ray.direction * 10000f;
+		Vector3 target = ray.direction * rigidbody.velocity.magnitude;
 
-		Vector3 pos = bulletHatch.position;
+		Vector3 pos = aimingObject.position;
 		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 		BulletController bulletController = bullet.GetComponent<BulletController> ();
 		//bulletController.Init(0.75f, this.rigidbody.velocity);
-		bulletController.Init(0.75f, target);
+		bulletController.Init(0.75f, target, this.collider);
 	}
 
 	[RPC]

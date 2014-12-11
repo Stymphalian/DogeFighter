@@ -8,9 +8,11 @@ public class NetworkManager : MonoBehaviour {
 	public int serverCreateAttempts = 10;
 	public int clientJoinAttempts = 10;
 	public bool autoConnect= false;
+	public bool alwaysNewServer = false;
 	public string defaultSceneName = "Demo";
 	
 	public delegate void OnPlay();
+	
 	private bool shouldConnect = false;
 	private OnPlay onPlayCallback = null;
 	
@@ -42,7 +44,10 @@ public class NetworkManager : MonoBehaviour {
 		
 		HostData[] hostData = MasterServer.PollHostList();			
 		bool hostFound = false;
-		for( int i = 0;i < hostData.Length; ++i){		
+		for( int i = 0;i < hostData.Length; ++i){	
+			if( alwaysNewServer == true){
+				break;
+			}
 			Debug.Log("Game name : " + hostData[i].gameName);
 			Debug.Log("connectedPlayers : " + hostData[i].connectedPlayers);
 			Debug.Log("PlayerLimit : " + hostData[i].playerLimit);
@@ -61,9 +66,9 @@ public class NetworkManager : MonoBehaviour {
 		}
 		
 //		// use the callback and do shit.
-		if( onPlayCallback != null){
-			onPlayCallback();
-		}
+//		if( onPlayCallback != null){
+//			onPlayCallback();
+//		}
 		
 	}
 	private void startNewServer(){
@@ -114,9 +119,9 @@ public class NetworkManager : MonoBehaviour {
 	
 	void OnConnectedToServer(){
 		// use the callback and do shit.
-//		if( onPlayCallback != null){
-//			onPlayCallback();
-//		}
+		if( onPlayCallback != null){
+			onPlayCallback();
+		}
 	}
 	
 	void OnDisconnectedFromServer(){
@@ -150,6 +155,9 @@ public class NetworkManager : MonoBehaviour {
 //			onPlayCallback();
 //		}
 		Debug.Log ("Server Initialized");
+		if( onPlayCallback != null){
+			onPlayCallback();
+		}
 	}
 	
 	void OnMasterServerEvent(MasterServerEvent ev){

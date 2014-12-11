@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400008}
   - 198: {fileID: 19800008}
   - 199: {fileID: 19900008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: part_burst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 400010}
   - 198: {fileID: 19800010}
   - 199: {fileID: 19900010}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: part_blast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: part_sparks_short
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 198: {fileID: 19800002}
   - 199: {fileID: 19900002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: part_shower_blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - 4: {fileID: 400006}
   - 198: {fileID: 19800006}
   - 199: {fileID: 19900006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: part_shockwave_immediate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - 199: {fileID: 19900012}
   - 114: {fileID: 11400002}
   - 82: {fileID: 8200000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: missile_fire_exp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
