@@ -88,6 +88,8 @@ public class SpaceShipControl : MonoBehaviour {
 				OVRRig.SetActive(true);
 			}
 			Destroy(defaultCamera.gameObject);
+			crosshair = OVRRig.transform.Find("Crosshair").gameObject;
+			aimingCameraTransform = OVRRig.transform.Find("LeftEyeAnchor");
 		} else {
 			Destroy(OVRRig);
 			crosshair = defaultCamera.gameObject.transform.Find("Crosshair").gameObject;
