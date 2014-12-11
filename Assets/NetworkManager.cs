@@ -120,6 +120,7 @@ public class NetworkManager : MonoBehaviour {
 		// use the callback and do shit.
 		if( onPlayCallback != null){
 			onPlayCallback();
+			onPlayCallback = null;
 		}
 	}
 	
@@ -156,6 +157,7 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log ("Server Initialized");
 		if( onPlayCallback != null){
 			onPlayCallback();
+			onPlayCallback = null;
 		}
 	}
 	
