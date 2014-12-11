@@ -27,10 +27,7 @@ public class MouseLook : MonoBehaviour {
 
 	public float minimumY = -60F;
 	public float maximumY = 60F;
-
-	public Texture2D crosshairTexture;
-	public float crosshairScale = 1;
-
+	
 	float rotationY = 0F;
 	bool networkIsMine = false;
 	
@@ -70,12 +67,5 @@ public class MouseLook : MonoBehaviour {
 		if (GetComponent<Rigidbody>())
 			GetComponent<Rigidbody>().freezeRotation = true;
 	}
-
-	void OnGUI(){
-		if(Time.timeScale != 0)
-		{
-			if(crosshairTexture!=null)
-				GUI.DrawTexture(new Rect((Screen.width-crosshairTexture.width*crosshairScale)/2 ,(Screen.height-crosshairTexture.height*crosshairScale)/2, crosshairTexture.width*crosshairScale, crosshairTexture.height*crosshairScale),crosshairTexture);
-		}
-	}
+	
 }
