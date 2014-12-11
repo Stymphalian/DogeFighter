@@ -61,31 +61,22 @@ public class MissleController : MonoBehaviour {
 //		Debug.Log(rigidbody.velocity);
 	}
 
-//	void OnTriggerEnter(Collider collision){
-//		Debug.Log("MissleController OnTriggerEnter");
-//		
-//		var player = collision.gameObject.GetComponent<SpaceShipControl>();
-//		if (player) {
-//			player.onHit(this.missileDamage);
-//		}
-//		
-//		ExplodeSelf();
-//	}
-	
-	void OnCollisionEnter(Collision collision){
-		Debug.Log("missle controller onCollisionEnter");
-
-		var player = collision.gameObject.GetComponent<SpaceShipControl>();
+	void OnTriggerEnter(Collider collider){
+		Debug.Log("MissleController OnTriggerEnter");
+		
+		var player = collider.gameObject.GetComponent<SpaceShipControl>();
 		if (player) {
+			Debug.Log("Missile hit a player");
 			player.onHit(this.missileDamage);
 		}
 		
 		ExplodeSelf();
 	}
-	
+
 	void ExplodeSelf(){
 		if( explosion != null){
-			Instantiate(explosion, transform.position, Quaternion.identity);
+			GameObject go = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
+			Destroy(go, 2.0f);
 		}
 		NetworkManager.Destroy(gameObject);
 	}
