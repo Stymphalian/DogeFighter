@@ -36,6 +36,7 @@ public class SpaceShipControl : MonoBehaviour {
 	public Object OVRRig;
 	public GameObject fireMissileExplosion;
 	public Transform missileHatch;
+	public Transform aimingObject;
 	
 	private float initialEmissionRate;
 	private int currentMissileCount;
@@ -159,23 +160,19 @@ public class SpaceShipControl : MonoBehaviour {
 	[RPC]
 	public void fireGun(){
 		Debug.Log("hey the gun fired");
+		Debug.Log(Input.mousePosition);
 		if( networkView.isMine){
 			networkView.RPC("fireGun",RPCMode.Others);
 		}
 
 		Ray ray = defaultCamera.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit = new RaycastHit();
-		Vector3 target;
-		if (Physics.Raycast (ray, out hit, 10000f))
-			target = hit.point;
-		else
-			target = ray.direction * 10000f;
+		Vector3 target = ray.direction * rigidbody.velocity.magnitude;
 
-		Vector3 pos = bulletHatch.position;
+		Vector3 pos = aimingObject.position;
 		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 		BulletController bulletController = bullet.GetComponent<BulletController> ();
 		//bulletController.Init(0.75f, this.rigidbody.velocity);
-		bulletController.Init(0.75f, target);
+		bulletController.Init(0.75f, target, this.collider);
 	}
 
 	[RPC]
