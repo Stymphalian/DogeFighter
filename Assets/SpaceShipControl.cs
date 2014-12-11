@@ -25,12 +25,14 @@ public class SpaceShipControl : MonoBehaviour {
 	// Bullet
 	public GameObject bulletPrefab;
 	public GameObject bulletBurstPrefab;	// temporarily using same prefab as missile explosion. Get new explosion prefab for bullet
+	public GameObject bulletHotGaugeProgressBar;
 	public Transform bulletHatch;
 	public float bulletFireInterval;
 	public float bulletHotGaugeIncreaseDeltaPerBullet;
 	public float bulletHotGaugeDecreaseDeltaPerSecond;
 	private float timeElapsedSinceLastBulletFire;
 	private float bulletHotGauge;
+	private float initialXPos;
 
 	public Camera defaultCamera;
 	public Object OVRRig;
@@ -69,6 +71,7 @@ public class SpaceShipControl : MonoBehaviour {
 			Destroy(OVRRig);
 		}
 
+		bulletHotGaugeProgressBar.renderer.material.color = new Color (0.80f, 0.30f, 0.20f);
 	}
 
 	void FixedUpdate () {
@@ -122,6 +125,9 @@ public class SpaceShipControl : MonoBehaviour {
 				bulletHotGauge = 0;
 			}
 		}
+
+		float currentScaleX = bulletHotGauge / BULLET_MAX_HOT_GAUGE;
+		bulletHotGaugeProgressBar.transform.localScale = new Vector3 (currentScaleX, 1.0f, 1.0f);
 
 		timeElapsedSinceLastMissileRegen += Time.deltaTime;
 		if (timeElapsedSinceLastMissileRegen >= missileRegenInterval) {
