@@ -198,7 +198,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 		if( this.health <= 0 && !deadFlag){
 			this.health = 0;
-			healthText.text = this.health.ToString();
+			healthText.text = "Health: " + this.health.ToString();
 			deadFlag = true;
 			Debug.Log("You died!");
 			setCockpitMessage("YOU DIED.");
@@ -212,7 +212,7 @@ public class SpaceShipControl : MonoBehaviour {
 
 			StartCoroutine(delayRespawn());
 		} else if (this.health > 0) {
-			healthText.text = this.health.ToString();
+			healthText.text = "Health: " + this.health.ToString();
 		}
 	}
 
