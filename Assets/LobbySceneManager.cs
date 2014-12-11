@@ -24,10 +24,10 @@ public class LobbySceneManager : MonoBehaviour {
 	void OnConnectedCallback(){
 		if(Network.isServer){
 			Debug.LogError("I am the server");
-			Network.Instantiate(playerShipPrefab,new Vector3(spawnPoint.transform.position.x + 40, spawnPoint.transform.position.y + 40, spawnPoint.transform.position.z) ,Quaternion.identity,0);
+			Network.Instantiate(playerShipPrefab,new Vector3(spawnPoint.transform.position.x - 30, spawnPoint.transform.position.y + 10, spawnPoint.transform.position.z) ,Quaternion.identity,0);
 		}else if(Network.isClient){
 			Debug.LogError("I am the client");
-			Network.Instantiate(playerShipPrefab,new Vector3(spawnPoint.transform.position.x, spawnPoint.transform.position.y + 40, spawnPoint.transform.position.z),Quaternion.identity,0);
+			Network.Instantiate(playerShipPrefab,new Vector3(spawnPoint.transform.position.x + 30, spawnPoint.transform.position.y + 10, spawnPoint.transform.position.z),Quaternion.identity,0);
 
 		}
 	}
