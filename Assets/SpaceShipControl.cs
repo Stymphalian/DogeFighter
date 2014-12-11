@@ -205,66 +205,43 @@ public class SpaceShipControl : MonoBehaviour {
 	}
 
 	[RPC]
-	private void _fireGun(NetworkViewID bulletId,Vector3 target){
-		GameObject bullet = NetworkManager.Find(bulletId);
-		if( bullet == null){return;}
-		BulletController bulletController = bullet.GetComponent<BulletController> ();
-		bulletController.Init(0.75f, target, this.collider);
-	}
-	[RPC]
 	public void fireGun(){
 		Debug.Log("hey the gun fired");
 		Debug.Log(Input.mousePosition);
-
+		if( networkView.isMine){
+			networkView.RPC("fireGun",RPCMode.Others);
+		}
+		
 		Vector3 target = crosshair.transform.position - aimingCameraTransform.position;
 		target.Normalize ();
 		Vector3 pos = crosshair.transform.position + target * 10;
 		target = target * 300;
 		target = target + rigidbody.velocity;
-
+		
+		//		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 		GameObject bullet = (Instantiate (bulletPrefab, pos, Quaternion.identity) as GameObject);
 		BulletController bulletController = bullet.GetComponent<BulletController> ();
 		bulletController.Init(0.75f, target, this.collider);
-
-		if( networkView.isMine){
-			networkView.RPC("_fireGun",RPCMode.Others,bullet.networkView.viewID,target);
-		}
 	}
-
+	
 	[RPC]
-	private void _fireMissle(NetworkViewID ownerId,NetworkViewID targetViewId,NetworkViewID missleID){
+	public void fireMissle(NetworkViewID ownerId,NetworkViewID targetViewId){
+		if (networkView.isMine){
+			networkView.RPC("fireMissle",RPCMode.Others,ownerId,targetViewId);
+		}
+		
 		GameObject targetGameObject = NetworkManager.Find(targetViewId);
-		targetGameObject = null; // UNHACK THIS shit...
+		targetGameObject = null;
 		GameObject ownerObject = NetworkManager.Find(ownerId);
 		Vector3 pos = missileHatch.position;
-		GameObject missle1 = NetworkManager.Find(missleID);
-
+		GameObject missle1 = (Network.Instantiate(misslePrefab,pos,Quaternion.identity,0) as GameObject);
+		Network.Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity,0);
+		
 		currentMissileCount--;
 		
 		// set the target and stuff
 		MissleController m1 = missle1.GetComponent<MissleController>();
 		m1.Init(ownerObject,targetGameObject,0.75f,0.5f,this.rigidbody.velocity);
-	}
-
-
-	[RPC]
-	public void fireMissle(NetworkViewID ownerId,NetworkViewID targetViewId){
-		GameObject targetGameObject = NetworkManager.Find(targetViewId);
-		targetGameObject = null; // UNHACK this shit...
-		GameObject ownerObject = NetworkManager.Find(ownerId);
-		Vector3 pos = missileHatch.position;
-		GameObject missle1 = (Network.Instantiate(misslePrefab,pos,Quaternion.identity,0) as GameObject);
-		Network.Instantiate(fireMissileExplosion, missle1.transform.position, Quaternion.identity,0);
-
-		currentMissileCount--;
-
-		// set the target and stuff
-		MissleController m1 = missle1.GetComponent<MissleController>();
-		m1.Init(ownerObject,targetGameObject,0.75f,0.5f,this.rigidbody.velocity);
-
-		if (networkView.isMine){
-			networkView.RPC("_fireMissle",RPCMode.Others,ownerId,targetViewId,missle1.networkView.viewID);
-		}
 	}
 
 	[RPC]

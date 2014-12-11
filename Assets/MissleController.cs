@@ -61,20 +61,9 @@ public class MissleController : MonoBehaviour {
 //		Debug.Log(rigidbody.velocity);
 	}
 
-	void OnTriggerEnter(Collider collision){
-		Debug.Log("MissleController OnTriggerEnter");
-		
-		var player = collision.gameObject.GetComponent<SpaceShipControl>();
-		if (player) {
-			player.onHit(this.missileDamage);
-		}
-		
-		ExplodeSelf();
-	}
-	
-//	void OnCollisionEnter(Collision collision){
-//		Debug.Log("missle controller onCollisionEnter");
-//
+//	void OnTriggerEnter(Collider collision){
+//		Debug.Log("MissleController OnTriggerEnter");
+//		
 //		var player = collision.gameObject.GetComponent<SpaceShipControl>();
 //		if (player) {
 //			player.onHit(this.missileDamage);
@@ -82,6 +71,17 @@ public class MissleController : MonoBehaviour {
 //		
 //		ExplodeSelf();
 //	}
+	
+	void OnCollisionEnter(Collision collision){
+		Debug.Log("missle controller onCollisionEnter");
+
+		var player = collision.gameObject.GetComponent<SpaceShipControl>();
+		if (player) {
+			player.onHit(this.missileDamage);
+		}
+		
+		ExplodeSelf();
+	}
 	
 	void ExplodeSelf(){
 		if( explosion != null){

@@ -16,7 +16,6 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 96: {fileID: 9645028}
-  - 148: {fileID: 14800000}
   m_Layer: 8
   m_Name: missilePrefab
   m_TagString: Untagged
@@ -204,18 +203,6 @@ CapsuleCollider:
 --- !u!1002 &13600001
 EditorExtensionImpl:
   serializedVersion: 6
---- !u!148 &14800000
-NetworkView:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 400000}
-  m_ViewID:
-    m_ID: 0
-    m_Type: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

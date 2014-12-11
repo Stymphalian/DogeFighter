@@ -21,27 +21,27 @@ public class BulletController : MonoBehaviour {
 		//		Debug.Log(rigidbody.velocity);
 	}
 
-	void OnTriggerEnter(Collider collision){
-		Debug.Log("bullet contorller trigger happened");
-		
-		var player = collision.gameObject.GetComponent<SpaceShipControl>();
-		if (player) {
-			player.onHit(this.bulletDamage);
-		}
-		
-		ExplodeSelf();	// test if this is needed
-	}
-	
-//	void OnCollisionEnter(Collision collision){
-//		Debug.Log("Bullet controller on collision enter");
-//
+//	void OnTriggerEnter(Collider collision){
+//		Debug.Log("bullet contorller trigger happened");
+//		
 //		var player = collision.gameObject.GetComponent<SpaceShipControl>();
 //		if (player) {
 //			player.onHit(this.bulletDamage);
 //		}
-//
+//		
 //		ExplodeSelf();	// test if this is needed
 //	}
+	
+	void OnCollisionEnter(Collision collision){
+		Debug.Log("Bullet controller on collision enter");
+
+		var player = collision.gameObject.GetComponent<SpaceShipControl>();
+		if (player) {
+			player.onHit(this.bulletDamage);
+		}
+
+		ExplodeSelf();	// test if this is needed
+	}
 
 	void ExplodeSelf(){
 		if( explosion != null){
